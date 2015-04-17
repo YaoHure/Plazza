@@ -5,39 +5,47 @@
 ## Login   <jibb@epitech.net>
 ##
 ## Started on  Tue Apr 14 09:31:37 2015 Jean-Baptiste Grégoire
-## Last update Tue Apr 14 09:49:18 2015 Jean-Baptiste Grégoire
+## Last update Fri Apr 17 16:41:13 2015 Hugo Prenat
 ##
 
-DEBUG		= 	no
+DEBUG		= 	yes
 
 NAME		=	plazza
 
-SRC		=	src/main.cpp
+SRCDIR		=	src/
 
-OBJ		=	$(SRC:.cpp=.o)
+OBJDIR		=	obj/
 
-RM		=	rm -f
+SRC		=	$(SRCDIR)Cooker.cpp	\
+			$(SRCDIR)Kitchen.cpp
+
+OBJ		=	$(addprefix $(OBJDIR), $(notdir $(SRC:.cpp=.o)))
+
+RM		=	rm -fr
 
 CC		=	g++
 
-INCLUDES	=	includes/
+INCLUDES	=	-I includes/
 
-FOLDER_SRC	=	src/
-
-CPPFLAGS	=	-W -Wall -Wextra -I $(INCLUDES)
+CPPFLAGS	=	-W -Wall -Wextra $(INCLUDES)
 
 ifeq ($(DEBUG),yes)
 
-CPPFLAGS 	+= -g3
+CPPFLAGS 	+= 	-g3
 
 else
 
-CPPFLAGS	+= -O3
+CPPFLAGS	+= 	-O3
 
 endif
 
+FIRST		:=	$(shell test -d $(OBJDIR) || mkdir $(OBJDIR))
+
 $(NAME):	$(OBJ)
 		$(CC) -o $(NAME) $(OBJ)
+
+$(OBJDIR)%.o:	$(SRCDIR)%.cpp
+	$(CC) $(CPPFLAGS) -c -o $@ $<
 
 all:		$(NAME)
 
