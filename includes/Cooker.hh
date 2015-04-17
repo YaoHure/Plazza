@@ -5,7 +5,7 @@
 // Login   <prenat_h@epitech.eu>
 //
 // Started on  Thu Apr 16 17:09:52 2015 Hugo Prenat
-// Last update Fri Apr 17 16:15:17 2015 Hugo Prenat
+// Last update Fri Apr 17 20:52:41 2015 Hugo Prenat
 //
 
 #ifndef COOKER_HH_
@@ -24,4 +24,4 @@ class	Cooker
 
 };
 
-#endif /* !COOKER_HH_ */
+#endif // !COOKER_HH_
