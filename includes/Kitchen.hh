@@ -5,7 +5,7 @@
 // Login   <prenat_h@epitech.eu>
 //
 // Started on  Fri Apr 17 15:27:59 2015 Hugo Prenat
-// Last update Fri Apr 17 16:14:41 2015 Hugo Prenat
+// Last update Fri Apr 17 20:52:56 2015 Hugo Prenat
 //
 
 #ifndef KITCHEN_HH_
@@ -18,4 +18,4 @@ class	Kitchen
   ~Kitchen();
 };
 
-#endif /* !KITCHEN_HH_ */
+#endif // !KITCHEN_HH_

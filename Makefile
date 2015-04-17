@@ -5,7 +5,7 @@
 ## Login   <jibb@epitech.net>
 ##
 ## Started on  Tue Apr 14 09:31:37 2015 Jean-Baptiste Grégoire
-## Last update Fri Apr 17 16:41:13 2015 Hugo Prenat
+## Last update Fri Apr 17 23:17:33 2015 Hugo Prenat
 ##
 
 DEBUG		= 	yes
@@ -17,6 +17,9 @@ SRCDIR		=	src/
 OBJDIR		=	obj/
 
 SRC		=	$(SRCDIR)Cooker.cpp	\
+			$(SRCDIR)Error.cpp	\
+			$(SRCDIR)Reception.cpp	\
+			$(SRCDIR)main.cpp	\
 			$(SRCDIR)Kitchen.cpp
 
 OBJ		=	$(addprefix $(OBJDIR), $(notdir $(SRC:.cpp=.o)))

@@ -5,7 +5,7 @@
 // Login   <jibb@epitech.net>
 //
 // Started on  Fri Apr 17 16:28:27 2015 Jean-Baptiste Grégoire
-// Last update Fri Apr 17 17:49:05 2015 Jean-Baptiste Grégoire
+// Last update Fri Apr 17 22:35:44 2015 Hugo Prenat
 //
 
 #ifndef RECEPTION_HH_
@@ -20,7 +20,7 @@ public:
   Reception(float mult, int nb_cooker, int stock_time);
 
   bool			lauchUI() const;
-  std::string cosnt	&getInput() const;
+  std::string const	&getInput() const;
   void			getOutput() const;
   bool			manageOrder() const;
 
