@@ -9,7 +9,7 @@
 //
 
 #ifndef ECONDVAR_HH
-#define ECONDVAR_HH
+# define ECONDVAR_HH
 
 # include <iostream>
 # include <string>

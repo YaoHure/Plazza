@@ -4,69 +4,39 @@
 // Made by Jean-Baptiste Grégoire
 // Login   <jean-baptiste.gregoire@epitech.net>
 //
-// Started on  Fri Apr  17 18:10:22 2015 Jean-Baptiste Grégoire
-// Last update Fri Apr  17 18:10:22 2015 Jean-Baptiste Grégoire
+// Started on  Sat Apr  18 11:58:53 2015 Jean-Baptiste Grégoire
+// Last update Sat Apr  18 11:58:53 2015 Jean-Baptiste Grégoire
 //
 
 #include "EThread.hh"
 
-EThread::EThread(int nb_thread)
+EThread::EThread() : _running(false)
 {
-  for (int i = 0; i < nb_thread; ++i)
-  {
-    pthread_t	*thread_tmp = new pthread_t;
-    std::pair<pthread_t *, bool> tmp(thread_tmp, true);
 
-    if (pthread_create(tmp.first, NULL, pendingFunc, NULL) != 0)
-      throw ;
-    _threads.push_back(tmp);
+}
+
+int    EThread::launch(void *(*routine)(void *), void *args)
+{
+  _running = true;
+  if (pthread_create(&_thread, NULL, routine, args) != 0)
+  {
+    _running = false;
+    return (-1);
   }
+  return (0);
 }
 
-pthread *getThread() const
+int   EThread::waitThread()
 {
-  std::vector<std::pair<pthread_t *, bool> >::const_iterator it;
-
-  for (it = _threads.begin(); it != _threads.end(); ++it)
-  {
-    if (it->second)
-    {
-      it->second = false;
-      //unlock the thread
-      return (it->first);
-    }
-  }
+  return (pthread_join(_thread, NULL));
 }
 
-void		pushThreadBack(pthread_t *thread)
+bool  EThread::is_running() const
 {
-  std::vector<std::pair<pthread_t *, bool> >::const_iterator it;
-
-  for (it = _threads.begin(); it != _threads.end(); ++it)
-  {
-    if (it->first == thread)
-    {
-      it->second = true;
-      // lock the thread
-    }
-  }  
-}
-
-bool		addNewThread()
-{
-  pthread_t *thread_tmp = new pthread_t;
-  std::pair<pthread_t *, bool> tmp(thread_tmp, true);
-
-  if (pthread_create(tmp.first, NULL, pendingFunc, NULL) != 0)
-    throw ;
-  _threads.push_back(tmp);
+  return (_running);
 }
 
 EThread::~EThread()
 {
-    while (!_threads.empty())
-    {
-      delete _threads.back();
-      _threads.pop_back();
-    }
+
 }

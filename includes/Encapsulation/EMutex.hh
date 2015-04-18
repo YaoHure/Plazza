@@ -9,7 +9,9 @@
 //
 
 #ifndef EMUTEX_HH
-#define EMUTEX_HH
+# define EMUTEX_HH
+
+# include <pthread.h>
 
 class EMutex
 {
@@ -19,6 +21,7 @@ public:
   int	lock();
   int	trylock();
   int	unlock();
+  pthread_mutex_t *getMutex();
 
   ~EMutex();
 

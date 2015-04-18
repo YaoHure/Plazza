@@ -12,22 +12,27 @@
 
 EMutex::EMutex()
 {
-  pthread_mutex_init(&_mutex, NULL)
+  pthread_mutex_init(&_mutex, NULL);
 }
 
 int	EMutex::lock()
 {
-  return (pthread_mutex_lock(_&mutex));
+  return (pthread_mutex_lock(&_mutex));
 }
 
 int EMutex::trylock()
 {
-  return (pthread_mutex_trylock(_&mutex));
+  return (pthread_mutex_trylock(&_mutex));
 }
 
 int EMutex::unlock()
 {
-  return (pthread_mutex_unlock(_&mutex));
+  return (pthread_mutex_unlock(&_mutex));
+}
+
+pthread_mutex_t	*EMutex::getMutex()
+{
+  return (&_mutex);
 }
 
 EMutex::~EMutex()

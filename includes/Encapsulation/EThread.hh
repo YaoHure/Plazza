@@ -4,26 +4,29 @@
 // Made by Jean-Baptiste Grégoire
 // Login   <jean-baptiste.gregoire@epitech.net>
 //
-// Started on  Fri Apr  17 18:04:17 2015 Jean-Baptiste Grégoire
-// Last update Fri Apr  17 18:04:17 2015 Jean-Baptiste Grégoire
+// Started on  Sat Apr  18 11:49:21 2015 Jean-Baptiste Grégoire
+// Last update Sat Apr  18 11:49:21 2015 Jean-Baptiste Grégoire
 //
 
 #ifndef ETHREAD_HH
-#define ETHREAD_HH
+# define ETHREAD_HH
 
 # include <pthread.h>
 
-class	EThread
+#define NO_TIMEOUT	0
+
+class EThread
 {
 public:
   EThread();
-  pthread	*getThread() const;
-  bool		addNewThread();
-  void		pushThreadBack(pthread_t *thread);
+  int		launch(void *(*routine)(void *), void *args);
+  bool	is_running() const;
+  int		waitThread();
   ~EThread();
-
+ 
 private:
-  std::vector<std::pair<pthread_t *, bool> >	_threads;
+  pthread_t	_thread;
+  bool		_running; 
 };
 
 #endif // !ETHREAD_HH

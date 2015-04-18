@@ -28,14 +28,12 @@ void	ECondVar::sleep(int sec)
 {
   if (sec)
   {
-    const struct timespec = {0};
+    struct timespec t = {sec, 0};
 
-    timespec.tv_sec = sec;
-    timespec.tv_nsec = 0;
-    pthread_cond_timedwait(&_cond, &_mutex, &timespec);
+    pthread_cond_timedwait(&_cond, _mutex.getMutex(), &t);
   }
   else
-    pthread_cond_wait(&_cond, &_mutex);
+    pthread_cond_wait(&_cond, _mutex.getMutex());
 }
 
 ECondVar::~ECondVar()

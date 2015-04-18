@@ -5,7 +5,7 @@
 // Login   <tran_0@epitech.net>
 //
 // Started on  Thu Mar 26 17:30:00 2015 David Tran
-// Last update Fri Apr 17 21:53:03 2015 Hugo Prenat
+// Last update Sat Apr 18 18:36:23 2015 Jean-Baptiste Grégoire
 //
 
 #include "Error.hh"
