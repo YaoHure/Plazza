@@ -5,7 +5,7 @@
 // Login   <jibb@epitech.net>
 //
 // Started on  Fri Apr 17 16:28:27 2015 Jean-Baptiste Grégoire
-// Last update Sun Apr 19 17:59:30 2015 Hugo Prenat
+// Last update Sun Apr 19 18:32:10 2015 Hugo Prenat
 //
 
 #ifndef RECEPTION_HH_
@@ -14,6 +14,7 @@
 # include <iostream>
 # include <string>
 # include <map>
+# include <curses.h>
 
 # include "Plazza.hh"
 
@@ -25,6 +26,10 @@ public:
 
 public:
   void					getInput();
+  bool					launchUI();
+  std::string const			&getInput() const;
+  void					getOutput() const;
+  bool					manageOrder() const;
 
 private:
   void					parseOrder(std::string &order);
@@ -35,6 +40,11 @@ private:
   int					_stock_time;
   std::map<std::string, TypePizza>	_typePizza;
   std::map<std::string, TaillePizza>	_sizePizza;
+  WINDOW				*_screen;
+  WINDOW				*_output;
+  WINDOW				*_input;
+  int					_win_x;
+  int					_win_y;
 };
 
 #endif // !RECEPTION_HH_

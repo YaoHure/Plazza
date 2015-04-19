@@ -5,11 +5,15 @@
 // Login   <prenat_h@epitech.eu>
 //
 // Started on  Fri Apr 17 20:57:20 2015 Hugo Prenat
-// Last update Sun Apr 19 16:37:33 2015 Hugo Prenat
+// Last update Sun Apr 19 18:29:58 2015 Hugo Prenat
 //
 
 #include <iostream>
 #include <cstdlib>
+
+// TEMPORARY --> for the function sleep
+#include <unistd.h>
+// // // //
 
 #include "Error.hh"
 #include "Reception.hh"
@@ -55,6 +59,9 @@ int		main(int argc, char **argv)
   try
     {
       rec = checkArg(argc, argv);
+      rec->launchUI();
+      sleep(10);
+      delete rec;
     }
   catch (const std::exception &err)
     {
