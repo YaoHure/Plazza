@@ -13,13 +13,14 @@
 
 # include <iostream>
 # include <string>
+# include <curses.h>
 
 class	Reception
 {
 public:
   Reception(float mult, int nb_cooker, int stock_time);
 
-  bool			lauchUI() const;
+  bool			launchUI();
   std::string const	&getInput() const;
   void			getOutput() const;
   bool			manageOrder() const;
@@ -34,6 +35,11 @@ private:
   float			_mult;
   int			_nb_cooker;
   int			_stock_time;
+  WINDOW	*_screen;
+  WINDOW	*_output;
+  WINDOW	*_input;
+  int			_win_x;
+  int			_win_y;
 };
 
 #endif // !RECEPTION_HH_

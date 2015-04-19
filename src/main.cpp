@@ -5,11 +5,15 @@
 // Login   <prenat_h@epitech.eu>
 //
 // Started on  Fri Apr 17 20:57:20 2015 Hugo Prenat
-// Last update Fri Apr 17 23:16:20 2015 Hugo Prenat
+// Last update Sun Apr 19 15:48:37 2015 Jean-Baptiste Grégoire
 //
 
 #include <iostream>
 #include <cstdlib>
+
+// TEMPORARY --> for the function sleep
+#include <unistd.h>
+// // // //
 
 #include "Error.hh"
 #include "Reception.hh"
@@ -39,6 +43,9 @@ int		main(int argc, char **argv)
   try
     {
       rec = checkArg(argc, argv);
+      rec->launchUI();
+      sleep(10);
+      delete rec;
     }
   catch (PlazzaErrorArg const &err)
     {

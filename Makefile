@@ -5,7 +5,7 @@
 ## Login   <jibb@epitech.net>
 ##
 ## Started on  Tue Apr 14 09:31:37 2015 Jean-Baptiste Grégoire
-## Last update Fri Apr 17 23:17:33 2015 Hugo Prenat
+## Last update Sun Apr 19 15:57:17 2015 Jean-Baptiste Grégoire
 ##
 
 DEBUG		= 	yes
@@ -32,6 +32,8 @@ INCLUDES	=	-I includes/
 
 CPPFLAGS	=	-W -Wall -Wextra $(INCLUDES)
 
+LDFLAGS		=	-lncurses
+
 ifeq ($(DEBUG),yes)
 
 CPPFLAGS 	+= 	-g3
@@ -45,7 +47,7 @@ endif
 FIRST		:=	$(shell test -d $(OBJDIR) || mkdir $(OBJDIR))
 
 $(NAME):	$(OBJ)
-		$(CC) -o $(NAME) $(OBJ)
+		$(CC) -o $(NAME) $(OBJ) $(LDFLAGS)
 
 $(OBJDIR)%.o:	$(SRCDIR)%.cpp
 	$(CC) $(CPPFLAGS) -c -o $@ $<
