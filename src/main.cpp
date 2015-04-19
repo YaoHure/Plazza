@@ -5,7 +5,7 @@
 // Login   <prenat_h@epitech.eu>
 //
 // Started on  Fri Apr 17 20:57:20 2015 Hugo Prenat
-// Last update Sun Apr 19 18:29:58 2015 Hugo Prenat
+// Last update Sun Apr 19 22:57:59 2015 Jean-Baptiste Grégoire
 //
 
 #include <iostream>
@@ -60,6 +60,7 @@ int		main(int argc, char **argv)
     {
       rec = checkArg(argc, argv);
       rec->launchUI();
+      rec->getInput();
       sleep(10);
       delete rec;
     }
@@ -67,6 +68,5 @@ int		main(int argc, char **argv)
     {
       std::cerr << err.what() << std::endl;
     }
-  rec->getInput();
   return (0);
 }

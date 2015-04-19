@@ -5,12 +5,11 @@
 // Login   <jibb@epitech.net>
 //
 // Started on  Fri Apr 17 16:28:42 2015 Jean-Baptiste Grégoire
-// Last update Sun Apr 19 18:31:09 2015 Hugo Prenat
+// Last update Sun Apr 19 23:01:28 2015 Jean-Baptiste Grégoire
 //
 
 #include <sstream>
 #include <algorithm>
-
 #include "Reception.hh"
 
 Reception::Reception(float mult, int nb_cooker, int stock_time) :
@@ -28,14 +27,10 @@ Reception::Reception(float mult, int nb_cooker, int stock_time) :
   _sizePizza["L"] = L;
   _sizePizza["XL"] = XL;
   _sizePizza["XXL"] = XXL;
-}
-
-void		Reception::getInput()
-{
-  std::string	toto = "regina XXL x2; fantasia M x3; margarita S x1";
-
-  parseOrder(toto);
-  std::cout << toto << std::endl;
+  int ret = mkfifo(FIFO_OUTPUT, S_IFIFO | 0666);
+  if (ret == -1 && errno != EEXIST)
+    throw PlazzaErrorRuntime("Initialisation failed !");
+  _quit = false;
 }
 
 void			Reception::parseOrder(std::string &order)
@@ -74,41 +69,72 @@ void			Reception::parseOrder(std::string &order)
       std::cout << _typePizza[type] << std::endl;
       stream >> nbr;
     }
-  if ((_screen = initscr()) == NULL)
-    throw ;
-  getmaxyx(_screen, _win_y, _win_x);
 }
 
 bool      Reception::launchUI()
 {
   int		out_x, out_y;
 
+  if ((_screen = initscr()) == NULL)
+    throw PlazzaErrorRuntime("Initialisation failed !");
+  getmaxyx(_screen, _win_y, _win_x);
   if ((_output = newwin(static_cast<int>(9.0 / 10.0 * static_cast<float>(_win_y)), _win_x, 0, 0)) == NULL)
-    throw ;
+    throw PlazzaErrorRuntime("Initialisation failed !");
   getmaxyx(_output, out_y, out_x);
   if ((_input = newwin(_win_y - out_y, _win_x, out_y, 0)) == NULL)
-    throw ;
+    throw PlazzaErrorRuntime("Initialisation failed !");
   curs_set(0);
   box(_output, '|', '-');
   box(_input, '|', '-');
   scrollok(_output, TRUE);
+  wmove(_input, getcury(_input) + 2, 5);
   wrefresh(_output);
   wrefresh(_input);
 //  refresh();
   return (true);
 }
 
-std::string const &Reception::getInput() const
+void		Reception::getInput()
 {
-  return (NULL);
+  std::string	buf;
+  char	c;
+
+  while (buf != "quit")
+    {
+      buf.clear();
+      c = 0;
+      while (c != '\n')
+	{
+	  c = wgetch(_input);
+	  if (c == 27)
+	    {
+	      _quit = true;
+	      return ;
+	    }
+	  buf.push_back(c);
+	}
+      if (buf != "quit")
+	_orders.push(buf);
+    }
+  _quit = true;
 }
 
-void      Reception::getOutput() const
+void			Reception::getOutput() const
 {
+  std::ifstream		ifs(FIFO_OUTPUT, std::ifstream::in);
+  std::stringstream	tmp;
 
+  while (ifs.good() && !_quit)
+    {
+      tmp << ifs.rdbuf();
+      std::string	buf(tmp.str());
+      mvwprintw(_output, _display_y, 0, "%s", buf.c_str());
+      tmp.str(std::string());
+    }
+  ifs.close();
 }
 
-bool      Reception::manageOrder() const
+bool		Reception::manageOrder() const
 {
   return (true);
 }

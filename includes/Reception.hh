@@ -5,18 +5,25 @@
 // Login   <jibb@epitech.net>
 //
 // Started on  Fri Apr 17 16:28:27 2015 Jean-Baptiste Grégoire
-// Last update Sun Apr 19 18:32:10 2015 Hugo Prenat
+// Last update Sun Apr 19 21:17:45 2015 Jean-Baptiste Grégoire
 //
 
 #ifndef RECEPTION_HH_
 # define RECEPTION_HH_
 
+# include <sys/types.h>
+# include <sys/stat.h>
 # include <iostream>
+# include <fstream>
 # include <string>
 # include <map>
 # include <curses.h>
-
+# include <queue>
+# include <cerrno>
 # include "Plazza.hh"
+
+# define	BUFF_SIZE	256
+# define	FIFO_OUTPUT	"fifo_display"
 
 class					Reception
 {
@@ -25,9 +32,8 @@ public:
   ~Reception();
 
 public:
-  void					getInput();
   bool					launchUI();
-  std::string const			&getInput() const;
+  void					getInput();
   void					getOutput() const;
   bool					manageOrder() const;
 
@@ -45,6 +51,9 @@ private:
   WINDOW				*_input;
   int					_win_x;
   int					_win_y;
+  int					_display_y;
+  std::queue<std::string>		_orders;
+  bool					_quit;
 };
 
 #endif // !RECEPTION_HH_

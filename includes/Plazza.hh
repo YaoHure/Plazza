@@ -13,6 +13,7 @@
 
 # include <iostream>
 # include <string>
+# include "Error.hh"
 
 enum	TypePizza
   {
