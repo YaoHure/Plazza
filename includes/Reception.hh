@@ -5,7 +5,7 @@
 // Login   <jibb@epitech.net>
 //
 // Started on  Fri Apr 17 16:28:27 2015 Jean-Baptiste Grégoire
-// Last update Fri Apr 17 22:35:44 2015 Hugo Prenat
+// Last update Sun Apr 19 17:59:30 2015 Hugo Prenat
 //
 
 #ifndef RECEPTION_HH_
@@ -13,27 +13,28 @@
 
 # include <iostream>
 # include <string>
+# include <map>
 
-class	Reception
+# include "Plazza.hh"
+
+class					Reception
 {
 public:
   Reception(float mult, int nb_cooker, int stock_time);
-
-  bool			lauchUI() const;
-  std::string const	&getInput() const;
-  void			getOutput() const;
-  bool			manageOrder() const;
-
   ~Reception();
 
-private:
+public:
+  void					getInput();
 
-  void			parseOrder() const;
+private:
+  void					parseOrder(std::string &order);
 
 private:
-  float			_mult;
-  int			_nb_cooker;
-  int			_stock_time;
+  float					_mult;
+  int					_nb_cooker;
+  int					_stock_time;
+  std::map<std::string, TypePizza>	_typePizza;
+  std::map<std::string, TaillePizza>	_sizePizza;
 };
 
 #endif // !RECEPTION_HH_

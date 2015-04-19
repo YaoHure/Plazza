@@ -5,7 +5,7 @@
 // Login   <prenat_h@epitech.eu>
 //
 // Started on  Fri Apr 17 20:57:20 2015 Hugo Prenat
-// Last update Fri Apr 17 23:16:20 2015 Hugo Prenat
+// Last update Sun Apr 19 16:37:33 2015 Hugo Prenat
 //
 
 #include <iostream>
@@ -13,6 +13,22 @@
 
 #include "Error.hh"
 #include "Reception.hh"
+
+int	isParamNum(char *str)
+{
+  int	i = 0;
+
+  if (str[i] == '-')
+    i++;
+  while (str[i])
+    {
+      if (isalpha(str[i]) != 0 && str[i] != '.')
+	throw PlazzaErrorArg(std::string("Error: ") + str +
+			     ", Bad arguments, must be a digit integer");
+      i++;
+    }
+  return (0);
+}
 
 Reception	*checkArg(int argc, char **argv)
 {
@@ -22,11 +38,11 @@ Reception	*checkArg(int argc, char **argv)
 
   if (argc != 4)
     throw PlazzaErrorArg("Usage: ./plazza [mult] [nb_cooker] [stock_time]");
-  if ((mult = atof(argv[1])) < 0)
+  if (isParamNum(argv[1]) == 0 && (mult = atof(argv[1])) < 0)
     throw PlazzaErrorArg("Error: [mult] must be >= 0");
-  if ((nb_cooker = atoi(argv[2])) <= 0)
+  if (isParamNum(argv[2]) == 0 && (nb_cooker = atoi(argv[2])) <= 0)
     throw PlazzaErrorArg("Error: [nb_cooker] must be > 0");
-  if ((stock_time = atoi(argv[3])) <= 0)
+  if (isParamNum(argv[3]) == 0 && (stock_time = atoi(argv[3])) <= 0)
     throw PlazzaErrorArg("Error: [stock_time] must be > 0");
   rec = new Reception(mult, nb_cooker, stock_time);
   return (rec);
@@ -40,9 +56,10 @@ int		main(int argc, char **argv)
     {
       rec = checkArg(argc, argv);
     }
-  catch (PlazzaErrorArg const &err)
+  catch (const std::exception &err)
     {
-      std::cout << err.what() << std::endl;
+      std::cerr << err.what() << std::endl;
     }
+  rec->getInput();
   return (0);
 }

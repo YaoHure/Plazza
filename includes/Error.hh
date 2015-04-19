@@ -4,8 +4,8 @@
 // Made by David Tran
 // Login   <tran_0@epitech.net>
 //
-// Started on  Thu Mar 26 16:34:32 2015 David Tran
-// Last update Fri Apr 17 21:41:11 2015 Hugo Prenat
+// Started on  Thu Apr 16 16:34:32 2015 David Tran
+// Last update Sat Apr 18 17:54:30 2015 Hugo Prenat
 //
 
 #ifndef ERROR_HH_
