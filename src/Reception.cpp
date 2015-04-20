@@ -5,7 +5,7 @@
 // Login   <jibb@epitech.net>
 //
 // Started on  Fri Apr 17 16:28:42 2015 Jean-Baptiste Grégoire
-// Last update Sun Apr 19 23:01:28 2015 Jean-Baptiste Grégoire
+// Last update Mon Apr 20 19:23:07 2015 Jean-Baptiste Grégoire
 //
 
 #include <sstream>
@@ -27,9 +27,6 @@ Reception::Reception(float mult, int nb_cooker, int stock_time) :
   _sizePizza["L"] = L;
   _sizePizza["XL"] = XL;
   _sizePizza["XXL"] = XXL;
-  int ret = mkfifo(FIFO_OUTPUT, S_IFIFO | 0666);
-  if (ret == -1 && errno != EEXIST)
-    throw PlazzaErrorRuntime("Initialisation failed !");
   _quit = false;
 }
 

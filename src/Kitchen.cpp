@@ -5,12 +5,17 @@
 // Login   <prenat_h@epitech.eu>
 //
 // Started on  Fri Apr 17 15:28:13 2015 Hugo Prenat
-// Last update Fri Apr 17 15:29:24 2015 Hugo Prenat
+// Last update Mon Apr 20 19:05:14 2015 Jean-Baptiste Grégoire
 //
 
 #include "Kitchen.hh"
 
 Kitchen::Kitchen()
+{
+  
+}
+
+Kitchen::~Kitchen()
 {
 
 }
