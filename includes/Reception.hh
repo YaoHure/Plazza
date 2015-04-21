@@ -5,7 +5,7 @@
 // Login   <jibb@epitech.net>
 //
 // Started on  Fri Apr 17 16:28:27 2015 Jean-Baptiste Grégoire
-// Last update Mon Apr 20 18:30:16 2015 Hugo Prenat
+// Last update Tue Apr 21 11:35:27 2015 Hugo Prenat
 //
 
 #ifndef RECEPTION_HH_
@@ -21,6 +21,7 @@
 # include <queue>
 # include <cerrno>
 # include "Plazza.hh"
+# include "NamedPipe.hh"
 
 # define	BUFF_SIZE	256
 # define	FIFO_OUTPUT	"fifo_display"

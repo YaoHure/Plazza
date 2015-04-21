@@ -5,7 +5,7 @@
 // Login   <jibb@epitech.net>
 //
 // Started on  Fri Apr 17 16:28:42 2015 Jean-Baptiste Grégoire
-// Last update Mon Apr 20 18:38:16 2015 Hugo Prenat
+// Last update Tue Apr 21 11:35:34 2015 Hugo Prenat
 //
 
 #include <sstream>
@@ -27,9 +27,6 @@ Reception::Reception(float mult, int nb_cooker, int stock_time) :
   _sizePizza["L"] = L;
   _sizePizza["XL"] = XL;
   _sizePizza["XXL"] = XXL;
-  int ret = mkfifo(FIFO_OUTPUT, S_IFIFO | 0666);
-  if (ret == -1 && errno != EEXIST)
-    throw PlazzaErrorRuntime("Initialisation failed !");
   _quit = false;
 }
 
@@ -128,17 +125,15 @@ void		Reception::getInput()
 
 void			Reception::getOutput() const
 {
-  std::ifstream		ifs(FIFO_OUTPUT, std::ifstream::in);
-  std::stringstream	tmp;
+  NamedPipe		nPipe(FIFO_OUTPUT);
+  std::string		buf;
 
-  while (ifs.good() && !_quit)
+  while (nPipe.is_good() && !_quit)
     {
-      tmp << ifs.rdbuf();
-      std::string	buf(tmp.str());
+      nPipe >> buf;
       mvwprintw(_output, _display_y, 0, "%s", buf.c_str());
-      tmp.str(std::string());
+      buf = "";
     }
-  ifs.close();
 }
 
 bool		Reception::manageOrder() const
