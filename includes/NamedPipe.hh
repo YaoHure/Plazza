@@ -5,7 +5,7 @@
 // Login   <jibb@epitech.net>
 //
 // Started on  Mon Apr 20 19:06:26 2015 Jean-Baptiste Grégoire
-// Last update Mon Apr 20 23:09:53 2015 Jean-Baptiste Grégoire
+// Last update Mon Apr 20 23:31:24 2015 Jean-Baptiste Grégoire
 //
 
 #ifndef NAMEDPIPE_HH_
@@ -21,15 +21,15 @@
 class		NamedPipe
 {
 public:
-  NamedPipe(char *name);
+  NamedPipe(std::string const &name);
   bool		is_good() const;
   void		operator>>(std::string &str);
   void		operator<<(std::string const &str);
   ~NamedPipe();
 
 private:
-  const char	*_name;
-  std::fstream	_fs;
+  std::string const	_name;
+  std::fstream		_fs;
 };
 
 #endif // !NAMEDPIPE_HH_
