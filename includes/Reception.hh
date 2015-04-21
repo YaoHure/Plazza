@@ -5,7 +5,7 @@
 // Login   <jibb@epitech.net>
 //
 // Started on  Fri Apr 17 16:28:27 2015 Jean-Baptiste Grégoire
-// Last update Sun Apr 19 21:17:45 2015 Jean-Baptiste Grégoire
+// Last update Mon Apr 20 18:30:16 2015 Hugo Prenat
 //
 
 #ifndef RECEPTION_HH_
@@ -52,6 +52,8 @@ private:
   int					_win_x;
   int					_win_y;
   int					_display_y;
+  int					_curs_x;
+  int					_curs_y;
   std::queue<std::string>		_orders;
   bool					_quit;
 };

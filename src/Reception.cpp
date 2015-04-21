@@ -5,7 +5,7 @@
 // Login   <jibb@epitech.net>
 //
 // Started on  Fri Apr 17 16:28:42 2015 Jean-Baptiste Grégoire
-// Last update Sun Apr 19 23:01:28 2015 Jean-Baptiste Grégoire
+// Last update Mon Apr 20 18:38:16 2015 Hugo Prenat
 //
 
 #include <sstream>
@@ -88,6 +88,9 @@ bool      Reception::launchUI()
   box(_input, '|', '-');
   scrollok(_output, TRUE);
   wmove(_input, getcury(_input) + 2, 5);
+  wprintw(_input, ">");
+  _curs_y = getcury(_input);
+  _curs_x = getcurx(_input);
   wrefresh(_output);
   wrefresh(_input);
 //  refresh();
@@ -115,6 +118,10 @@ void		Reception::getInput()
 	}
       if (buf != "quit")
 	_orders.push(buf);
+      wmove(_input, _curs_y, _curs_x);
+      for (size_t i = 0; i != buf.length(); i++)
+	wprintw(_input, " ");
+      wmove(_input, _curs_y, _curs_x);
     }
   _quit = true;
 }
