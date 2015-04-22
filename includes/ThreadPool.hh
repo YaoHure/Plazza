@@ -23,11 +23,13 @@ class	ThreadPool
 {
 public:
   ThreadPool(int nb_thread);
-  bool		addNewThread(int nb_thread);
-  void		addWork(void *(*routine)(void *), void *args);
-  void    pendingFunc();
-  void		stopThePool();
   ~ThreadPool();
+
+public:
+  bool    addNewThread(int nb_thread);
+  void    addWork(void *(*routine)(void *), void *args);
+  void    pendingFunc();
+  void    stopThePool();
 
 private:
   typedef struct

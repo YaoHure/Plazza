@@ -5,23 +5,36 @@
 // Login   <prenat_h@epitech.eu>
 //
 // Started on  Thu Apr 16 17:09:52 2015 Hugo Prenat
-// Last update Fri Apr 17 20:52:41 2015 Hugo Prenat
+// Last update Wed Apr 22 15:35:53 2015 Jean-Baptiste Grégoire
 //
 
 #ifndef COOKER_HH_
 # define COOKER_HH_
 
 # include <string>
+# include "Kitchen.hh"
 
 class	Cooker
 {
  public:
-  Cooker();
+  Cooker(Kitchen *kitchen);
   ~Cooker();
 
- public:
-  void	createPizza(std::string pizza, int size);
+public:
+  bool	createPizza(APizza const *pizza);
 
+private:
+  enum	Action
+    {
+      CHECK = 0,
+      GET
+    };
+
+private:
+  bool	manageIngredient(APizza const *pizza, enum Action action);
+
+private:
+  Kitchen	*_kitchen;
 };
 
 #endif // !COOKER_HH_

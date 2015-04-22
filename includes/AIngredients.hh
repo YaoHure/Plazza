@@ -5,7 +5,7 @@
 // Login   <prenat_h@epitech.eu>
 //
 // Started on  Tue Apr 21 23:55:33 2015 Hugo Prenat
-// Last update Wed Apr 22 11:52:08 2015 Hugo Prenat
+// Last update Wed Apr 22 16:35:10 2015 Jean-Baptiste Grégoire
 //
 
 #ifndef AINGREDIENTS_HH_
@@ -17,7 +17,7 @@ class			AIngredients
 {
 public:
   AIngredients(Ingredients, std::string name, long quantity);
-  virtual ~AIngredients();
+  virtual ~AIngredients() = 0;
 
 public:
   std::string		getName() const;
