@@ -5,7 +5,7 @@
 // Login   <jibb@epitech.net>
 //
 // Started on  Fri Apr 17 16:28:27 2015 Jean-Baptiste Grégoire
-// Last update Thu Apr 23 16:58:58 2015 Hugo Prenat
+// Last update Thu Apr 23 18:03:14 2015 Hugo Prenat
 //
 
 #ifndef RECEPTION_HH_
@@ -39,7 +39,7 @@ public:
   bool							launchUI();
   void							getInput();
   void							getOutput() const;
-  bool							manageOrder() const;
+  void							manageOrder();
   void							putIngredient(std::string const &name,
 								      std::string list[]);
 
@@ -53,6 +53,7 @@ private:
   std::map<std::string, TypePizza>			_typePizza;
   std::map<std::string, TaillePizza>			_sizePizza;
   std::map<std::string, std::vector<Ingredients*> >	_ingredientList;
+  std::map<std::string, int>				_timePizza;
   WINDOW						*_screen;
   WINDOW						*_output;
   WINDOW						*_input;

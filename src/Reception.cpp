@@ -5,7 +5,7 @@
 // Login   <jibb@epitech.net>
 //
 // Started on  Fri Apr 17 16:28:42 2015 Jean-Baptiste Grégoire
-// Last update Thu Apr 23 17:33:03 2015 Hugo Prenat
+// Last update Thu Apr 23 18:07:11 2015 Hugo Prenat
 //
 
 #include <sstream>
@@ -30,6 +30,10 @@ Reception::Reception(float mult, int nb_cooker, int stock_time) :
   _sizePizza["L"] = L;
   _sizePizza["XL"] = XL;
   _sizePizza["XXL"] = XXL;
+  _timePizza["margarita"] = 1 * _mult;
+  _timePizza["regina"] = 2 * _mult;
+  _timePizza["americaine"] = 2 * _mult;
+  _timePizza["fantasia"] = 4 * _mult;
   putIngredient("margarita", margarita);
   putIngredient("regina", regina);
   putIngredient("americaine", americaine);
@@ -71,7 +75,7 @@ void			Reception::parseOrder(std::string &order)
   std::string		str_nbr;
   size_t		pos = 0;
   size_t		semi_nbr = std::count(order.begin(), order.end(), ';');
-  long			nbr = 0;
+  unsigned long		nbr = 0;
   bool			good;
 
   while ((pos = order.find(";", pos)) != std::string::npos)
@@ -104,7 +108,10 @@ void			Reception::parseOrder(std::string &order)
       stream >> str_nbr;
       if (good)
 	{
-
+	  for (unsigned long i; i != nbr; i++)
+	    {
+	      new Pizza(_typePizza[type], _sizePizza[size], _timePizza[type]); // creation de la pizza
+	    }
 	}
     }
 }
@@ -154,8 +161,7 @@ void		Reception::getInput()
 	    }
 	  buf.push_back(c);
 	}
-      if (buf != "quit")
-	_orders.push(buf);
+      _orders.push(buf);
       wmove(_input, _curs_y, _curs_x);
       for (size_t i = 0; i != buf.length(); i++)
 	wprintw(_input, " ");
@@ -177,9 +183,16 @@ void			Reception::getOutput() const
     }
 }
 
-bool		Reception::manageOrder() const
+void		Reception::manageOrder()
 {
-  return (true);
+  std::string	queu;
+
+  while ((queu = _orders.front()) != "quit")
+    {
+      parseOrder(queu); // factory;
+      _orders.pop();
+    }
+  _orders.pop();
 }
 
 Reception::~Reception()
