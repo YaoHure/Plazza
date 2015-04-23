@@ -5,7 +5,7 @@
 // Login   <jibb@epitech.net>
 //
 // Started on  Fri Apr 17 16:28:27 2015 Jean-Baptiste Grégoire
-// Last update Wed Apr 22 23:36:03 2015 Jean-Baptiste Grégoire
+// Last update Thu Apr 23 23:38:22 2015 Jean-Baptiste Grégoire
 //
 
 #ifndef RECEPTION_HH_
@@ -20,45 +20,52 @@
 # include <curses.h>
 # include <queue>
 # include <cerrno>
+
 # include "Plazza.hh"
 # include "NamedPipe.hh"
 # include "EThread.hh"
+# include "Ingredients.hh"
+# include "Pizza.hh"
 
 # define	BUFF_SIZE	256
 # define	FIFO_OUTPUT	"fifo_display"
 
-class					Reception
+class							Reception
 {
 public:
   Reception(float mult, int nb_cooker, int stock_time);
   ~Reception();
 
 public:
-  bool					launchUI();
-  void					getInput();
-  void					getOutput() const;
-  bool					manageOrder() const;
+  bool							launchUI();
+  void							getInput();
+  void							getOutput() const;
+  void							manageOrder();
+  void							putIngredient(std::string const &name,
+								      std::string list[]);
 
 private:
-  void					parseOrder(std::string &order);
+  void							parseOrder(std::string &order);
 
 private:
-  float					_mult;
-  int					_nb_cooker;
-  int					_stock_time;
-  std::map<std::string, TypePizza>	_typePizza;
-  std::map<std::string, TaillePizza>	_sizePizza;
-  WINDOW				*_screen;
-  WINDOW				*_output;
-  WINDOW				*_input;
-  int					_win_x;
-  int					_win_y;
-  int					_display_y;
-  int					_curs_x;
-  int					_curs_y;
-  std::queue<std::string>		_orders;
-  bool					_quit;
-  EThread				_display;
+  float							_mult;
+  int							_nb_cooker;
+  int							_stock_time;
+  std::map<std::string, TypePizza>			_typePizza;
+  std::map<std::string, TaillePizza>			_sizePizza;
+  std::map<std::string, std::vector<Ingredients*> >	_ingredientList;
+  std::map<std::string, int>				_timePizza;
+  WINDOW						*_screen;
+  WINDOW						*_output;
+  WINDOW						*_input;
+  int							_win_x;
+  int							_win_y;
+  int							_display_y;
+  int							_curs_x;
+  int							_curs_y;
+  std::queue<std::string>				_orders;
+  bool							_quit;
+  EThread						_display;
 };
 
 void		*startGetOutput(void *p);

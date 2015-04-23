@@ -5,7 +5,7 @@
 // Login   <prenat_h@epitech.eu>
 //
 // Started on  Fri Apr 17 15:28:13 2015 Hugo Prenat
-// Last update Wed Apr 22 16:26:20 2015 Jean-Baptiste Grégoire
+// Last update Thu Apr 23 17:15:56 2015 Hugo Prenat
 //
 
 #include "Kitchen.hh"
@@ -17,7 +17,7 @@ Kitchen::Kitchen(unsigned int nbCooker, float mult, int stock_time) :
 
 }
 
-bool			Kitchen::addOnePizza(APizza &pizza)
+bool			Kitchen::addOnePizza(Pizza &pizza)
 {
   cookerArgs		args;
 
@@ -35,7 +35,7 @@ unsigned int		Kitchen::getFreeCooker() const
   return (_capacity - _nbPizza);
 }
 
-std::vector<AIngredients *> const *Kitchen::getAvailableIngredients() const
+std::vector<Ingredients *> const *Kitchen::getAvailableIngredients() const
 {
   return (&_ingredients);
 }
