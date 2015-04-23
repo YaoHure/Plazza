@@ -5,7 +5,7 @@
 // Login   <jibb@epitech.net>
 //
 // Started on  Fri Apr 17 16:28:27 2015 Jean-Baptiste Grégoire
-// Last update Tue Apr 21 11:35:27 2015 Hugo Prenat
+// Last update Wed Apr 22 23:36:03 2015 Jean-Baptiste Grégoire
 //
 
 #ifndef RECEPTION_HH_
@@ -22,6 +22,7 @@
 # include <cerrno>
 # include "Plazza.hh"
 # include "NamedPipe.hh"
+# include "EThread.hh"
 
 # define	BUFF_SIZE	256
 # define	FIFO_OUTPUT	"fifo_display"
@@ -57,6 +58,9 @@ private:
   int					_curs_y;
   std::queue<std::string>		_orders;
   bool					_quit;
+  EThread				_display;
 };
+
+void		*startGetOutput(void *p);
 
 #endif // !RECEPTION_HH_

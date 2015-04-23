@@ -5,7 +5,7 @@
 // Login   <jibb@epitech.net>
 //
 // Started on  Fri Apr 17 16:28:42 2015 Jean-Baptiste Grégoire
-// Last update Tue Apr 21 11:35:34 2015 Hugo Prenat
+// Last update Thu Apr 23 23:09:50 2015 Jean-Baptiste Grégoire
 //
 
 #include <sstream>
@@ -85,21 +85,25 @@ bool      Reception::launchUI()
   box(_input, '|', '-');
   scrollok(_output, TRUE);
   wmove(_input, getcury(_input) + 2, 5);
-  wprintw(_input, ">");
+  wprintw(_input, "> ");
   _curs_y = getcury(_input);
   _curs_x = getcurx(_input);
+  _display_y = 1;
   wrefresh(_output);
   wrefresh(_input);
+  if (_display.launch(startGetOutput, this) != 0)
+    throw PlazzaErrorRuntime("Can't launch the output screen !");
 //  refresh();
   return (true);
 }
 
 void		Reception::getInput()
 {
+  NamedPipe	nPipe(FIFO_OUTPUT);
   std::string	buf;
   char	c;
 
-  while (buf != "quit")
+  while (buf != "quit\n")
     {
       buf.clear();
       c = 0;
@@ -119,20 +123,24 @@ void		Reception::getInput()
       for (size_t i = 0; i != buf.length(); i++)
 	wprintw(_input, " ");
       wmove(_input, _curs_y, _curs_x);
+      nPipe << buf;
     }
   _quit = true;
+  _display.waitThread();
 }
 
 void			Reception::getOutput() const
 {
   NamedPipe		nPipe(FIFO_OUTPUT);
   std::string		buf;
+  int i = 1;
 
   while (nPipe.is_good() && !_quit)
     {
       nPipe >> buf;
-      mvwprintw(_output, _display_y, 0, "%s", buf.c_str());
-      buf = "";
+      mvwprintw(_output, i, 5, "*** %s ***", buf.c_str());
+      wrefresh(_output);
+      i++;
     }
 }
 
@@ -146,4 +154,10 @@ Reception::~Reception()
   delwin(_output);
   delwin(_input);
   endwin();
+}
+
+void		*startGetOutput(void *p)
+{
+  reinterpret_cast<Reception *>(p)->getOutput();
+  return (NULL);
 }

@@ -5,7 +5,7 @@
 // Login   <jibb@epitech.net>
 //
 // Started on  Mon Apr 20 19:06:26 2015 Jean-Baptiste Grégoire
-// Last update Mon Apr 20 23:31:24 2015 Jean-Baptiste Grégoire
+// Last update Thu Apr 23 22:40:56 2015 Jean-Baptiste Grégoire
 //
 
 #ifndef NAMEDPIPE_HH_
@@ -29,7 +29,8 @@ public:
 
 private:
   std::string const	_name;
-  std::fstream		_fs;
+  std::ifstream		_ifs;
+  std::ofstream		_ofs;
 };
 
 #endif // !NAMEDPIPE_HH_
