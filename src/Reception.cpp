@@ -5,7 +5,7 @@
 // Login   <jibb@epitech.net>
 //
 // Started on  Fri Apr 17 16:28:42 2015 Jean-Baptiste Grégoire
-// Last update Tue Apr 21 11:35:34 2015 Hugo Prenat
+// Last update Thu Apr 23 17:33:03 2015 Hugo Prenat
 //
 
 #include <sstream>
@@ -15,11 +15,14 @@
 Reception::Reception(float mult, int nb_cooker, int stock_time) :
   _mult(mult), _nb_cooker(nb_cooker), _stock_time(stock_time)
 {
-  _mult = mult;
-  _nb_cooker = nb_cooker;
-  _stock_time = stock_time;
-  _typePizza["regina"] = Regina;
+  std::string	margarita[] = {"Doe", "Tomato", "Gruyere", ""};
+  std::string	regina[] = {"Doe", "Tomato", "Gruyere", "Ham", "Mushrooms", ""};
+  std::string	americaine[] = {"Doe", "Tomato", "Gruyere", "Steak", ""};
+  std::string	fantasia[] = {"Doe", "Tomato", "Eggplant", "GoatCheese",
+			      "ChiefLove", ""};
+
   _typePizza["margarita"] = Margarita;
+  _typePizza["regina"] = Regina;
   _typePizza["americaine"] = Americaine;
   _typePizza["fantasia"] = Fantasia;
   _sizePizza["S"] = S;
@@ -27,7 +30,37 @@ Reception::Reception(float mult, int nb_cooker, int stock_time) :
   _sizePizza["L"] = L;
   _sizePizza["XL"] = XL;
   _sizePizza["XXL"] = XXL;
+  putIngredient("margarita", margarita);
+  putIngredient("regina", regina);
+  putIngredient("americaine", americaine);
+  putIngredient("fantasia", fantasia);
   _quit = false;
+}
+
+void	Reception::putIngredient(std::string const &name, std::string list[])
+{
+  for (int i = 0; list[i] != ""; i++)
+    _ingredientList[name].push_back(new Ingredients(list[i]));
+}
+
+long	getRealNbr(std::string const str)
+{
+  long	nbr = 0;
+  int	i = 1;
+
+  if (str[0] != 'x')
+    return (-1);
+  if (str[i] == '-')
+    return (-1);
+  if (str.length() < 1)
+    return (-1);
+  while (str[i])
+    {
+      if (isalpha(str[i]) != 0)
+	return (-1);
+      i++;
+    }
+  return (nbr);
 }
 
 void			Reception::parseOrder(std::string &order)
@@ -35,9 +68,11 @@ void			Reception::parseOrder(std::string &order)
   std::stringstream	stream;
   std::string		type;
   std::string		size;
-  std::string		nbr;
+  std::string		str_nbr;
   size_t		pos = 0;
   size_t		semi_nbr = std::count(order.begin(), order.end(), ';');
+  long			nbr = 0;
+  bool			good;
 
   while ((pos = order.find(";", pos)) != std::string::npos)
     {
@@ -47,24 +82,30 @@ void			Reception::parseOrder(std::string &order)
   stream << order;
   for (size_t i; i <= semi_nbr; i++)
     {
+      good = true;
       stream >> type;
       stream >> size;
-      stream >> nbr;
+      stream >> str_nbr;
       if (_typePizza[type] == 0)
 	{
 	  std::cerr << "Invalid type of pizza : " << type << std::endl;
-	  continue ;
+	  good = false;
 	}
       if (_sizePizza[size] == 0)
 	{
 	  std::cerr << "Invalid size of pizza : " << size << std::endl;
-	  continue ;
+	  good = false;
 	}
-      std::cout << "{" << type << "}" << std::endl;
-      std::cout << "{" << size << "}" << std::endl;
-      std::cout << "{" << nbr << "}" << std::endl;
-      std::cout << _typePizza[type] << std::endl;
-      stream >> nbr;
+      if ((nbr = getRealNbr(str_nbr)) <= 0)
+	{
+	  std::cerr << "Invalid number of pizza : " << str_nbr << std::endl;
+	  good = false;
+	}
+      stream >> str_nbr;
+      if (good)
+	{
+
+	}
     }
 }
 

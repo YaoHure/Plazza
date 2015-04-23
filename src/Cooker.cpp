@@ -5,7 +5,7 @@
 // Login   <prenat_h@epitech.eu>
 //
 // Started on  Fri Apr 17 15:26:41 2015 Hugo Prenat
-// Last update Wed Apr 22 16:32:05 2015 Jean-Baptiste Grégoire
+// Last update Thu Apr 23 17:18:54 2015 Hugo Prenat
 //
 
 #include "Cooker.hh"
@@ -15,12 +15,12 @@ Cooker::Cooker(Kitchen *kitchen) : _kitchen(kitchen)
 
 }
 
-bool	Cooker::manageIngredient(APizza const *pizza, enum Action action)
+bool	Cooker::manageIngredient(Pizza const *pizza, enum Action action)
 {
-  std::vector<AIngredients *> const	*availIngr = _kitchen->getAvailableIngredients();
-  std::vector<AIngredients *> const	*requIngr = pizza->getIngredients();
-  std::vector<AIngredients *>::const_iterator pizzaIt;
-  std::vector<AIngredients *>::const_iterator kitchenIt;
+  std::vector<Ingredients *> const	*availIngr = _kitchen->getAvailableIngredients();
+  std::vector<Ingredients *> const	*requIngr = pizza->getIngredients();
+  std::vector<Ingredients *>::const_iterator pizzaIt;
+  std::vector<Ingredients *>::const_iterator kitchenIt;
   unsigned int			nbIngr(0);
 
   for (pizzaIt = requIngr->begin(); pizzaIt != requIngr->end(); ++pizzaIt)
@@ -42,7 +42,7 @@ bool	Cooker::manageIngredient(APizza const *pizza, enum Action action)
   return (true);
 }
 
-bool				Cooker::createPizza(APizza const *pizza)
+bool				Cooker::createPizza(Pizza const *pizza)
 {
   // mutex lock
   if (manageIngredient(pizza, CHECK))

@@ -5,7 +5,7 @@
 // Login   <prenat_h@epitech.eu>
 //
 // Started on  Fri Apr 17 15:27:59 2015 Hugo Prenat
-// Last update Wed Apr 22 16:24:34 2015 Jean-Baptiste Grégoire
+// Last update Thu Apr 23 17:17:10 2015 Hugo Prenat
 //
 
 #ifndef KITCHEN_HH_
@@ -14,38 +14,39 @@
 # include <iostream>
 # include <string>
 # include <vector>
-# include "APizza.hh"
+
+# include "Pizza.hh"
 # include "ThreadPool.hh"
 
-class				Kitchen
+class					Kitchen
 {
 public:
   Kitchen(unsigned int nbCooker, float mult, int stock_time);
   ~Kitchen();
 
 public:
-  unsigned int			getFreeCooker() const;
-  std::vector<AIngredients *> const	*getAvailableIngredients() const;
-  float				getPreparationTime() const;
-  int				getStockTime() const;
+  unsigned int				getFreeCooker() const;
+  std::vector<Ingredients *> const	*getAvailableIngredients() const;
+  float					getPreparationTime() const;
+  int					getStockTime() const;
 
 public:
-  bool				addOnePizza(APizza &pizza);
+  bool					addOnePizza(Pizza &pizza);
 
 private:
-  unsigned int			_nbCooker;
-  unsigned int			_nbPizza;
-  unsigned int			_capacity;
-  ThreadPool			_cookers;
-  float				_mult;
-  int				_stock_time;
-  std::vector<APizza *>		_order;
-  std::vector<AIngredients *>	_ingredients;
+  unsigned int				_nbCooker;
+  unsigned int				_nbPizza;
+  unsigned int				_capacity;
+  ThreadPool				_cookers;
+  float					_mult;
+  int					_stock_time;
+  std::vector<Pizza *>			_order;
+  std::vector<Ingredients *>		_ingredients;
 };
 
 typedef struct
 {
-  APizza	*pizza;
+  Pizza		*pizza;
   Kitchen	*kitchen;
 }		cookerArgs;
 

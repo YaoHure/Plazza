@@ -5,7 +5,7 @@
 ## Login   <jibb@epitech.net>
 ##
 ## Started on  Tue Apr 14 09:31:37 2015 Jean-Baptiste Grégoire
-## Last update Wed Apr 22 16:26:54 2015 Jean-Baptiste Grégoire
+## Last update Thu Apr 23 17:10:45 2015 Hugo Prenat
 ##
 
 DEBUG		= 	yes
@@ -26,8 +26,8 @@ SRC		=	$(SRCDIR)Cooker.cpp	\
 			$(SRCDIR)EThread.cpp	\
 			$(SRCDIR)NamedPipe.cpp	\
 			$(SRCDIR)ThreadPool.cpp	\
-			$(SRCDIR)APizza.cpp	\
-			$(SRCDIR)AIngredients.cpp
+			$(SRCDIR)Pizza.cpp	\
+			$(SRCDIR)Ingredients.cpp
 
 OBJ		=	$(addprefix $(OBJDIR), $(notdir $(SRC:.cpp=.o)))
 

@@ -5,7 +5,7 @@
 // Login   <jibb@epitech.net>
 //
 // Started on  Fri Apr 17 11:39:10 2015 Jean-Baptiste Grégoire
-// Last update Tue Apr 21 23:51:18 2015 Jean-Baptiste Grégoire
+// Last update Thu Apr 23 16:38:45 2015 Hugo Prenat
 //
 
 #ifndef PLAZZA_HH_
@@ -30,19 +30,6 @@ enum	TaillePizza
     L = 4,
     XL = 8,
     XXL = 16
-  };
-
-enum	Ingredients
-  {
-    DOE = 1,
-    TOMATO = 2,
-    GRUYERE = 4,
-    HAM = 8,
-    MUSHROOMS = 16,
-    STEAK = 32,
-    EGGPLANT = 64,
-    GOAT_CHEESE = 128,
-    CHIEF_LIVE = 256
   };
 
 #endif // PLAZZA_HH_
