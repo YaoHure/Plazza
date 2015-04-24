@@ -5,7 +5,7 @@
 // Login   <prenat_h@epitech.eu>
 //
 // Started on  Tue Apr 21 23:55:33 2015 Hugo Prenat
-// Last update Thu Apr 23 17:11:40 2015 Hugo Prenat
+// Last update Fri Apr 24 03:19:20 2015 Jean-Baptiste Grégoire
 //
 
 #ifndef INGREDIENTS_HH_
@@ -23,6 +23,7 @@ public:
   std::string		getName() const;
   unsigned long		getQuantity() const;
   void			takeIngredient();
+  void			addIngredient();
 
 protected:
   const std::string	_name;

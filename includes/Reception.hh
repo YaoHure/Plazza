@@ -5,7 +5,7 @@
 // Login   <jibb@epitech.net>
 //
 // Started on  Fri Apr 17 16:28:27 2015 Jean-Baptiste Grégoire
-// Last update Thu Apr 23 23:38:22 2015 Jean-Baptiste Grégoire
+// Last update Fri Apr 24 03:43:49 2015 Jean-Baptiste Grégoire
 //
 
 #ifndef RECEPTION_HH_
@@ -13,6 +13,7 @@
 
 # include <sys/types.h>
 # include <sys/stat.h>
+# include <sys/wait.h>
 # include <iostream>
 # include <fstream>
 # include <string>
@@ -26,9 +27,9 @@
 # include "EThread.hh"
 # include "Ingredients.hh"
 # include "Pizza.hh"
+# include "Kitchen.hh"
 
 # define	BUFF_SIZE	256
-# define	FIFO_OUTPUT	"fifo_display"
 
 class							Reception
 {
@@ -41,6 +42,7 @@ public:
   void							getInput();
   void							getOutput() const;
   void							manageOrder();
+  void							sendPizza(Pizza &pizza);
   void							putIngredient(std::string const &name,
 								      std::string list[]);
 
@@ -55,6 +57,7 @@ private:
   std::map<std::string, TaillePizza>			_sizePizza;
   std::map<std::string, std::vector<Ingredients*> >	_ingredientList;
   std::map<std::string, int>				_timePizza;
+  std::vector<Kitchen *>				_headquarters;
   WINDOW						*_screen;
   WINDOW						*_output;
   WINDOW						*_input;

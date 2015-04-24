@@ -5,7 +5,7 @@
 // Login   <jibb@epitech.net>
 //
 // Started on  Fri Apr 17 11:39:10 2015 Jean-Baptiste Grégoire
-// Last update Thu Apr 23 16:38:45 2015 Hugo Prenat
+// Last update Fri Apr 24 03:43:55 2015 Jean-Baptiste Grégoire
 //
 
 #ifndef PLAZZA_HH_
@@ -14,6 +14,8 @@
 # include <iostream>
 # include <string>
 # include "Error.hh"
+
+# define	FIFO_OUTPUT	"fifo_display"
 
 enum	TypePizza
   {

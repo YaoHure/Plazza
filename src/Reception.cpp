@@ -5,7 +5,7 @@
 // Login   <jibb@epitech.net>
 //
 // Started on  Fri Apr 17 16:28:42 2015 Jean-Baptiste Grégoire
-// Last update Thu Apr 23 23:36:06 2015 Jean-Baptiste Grégoire
+// Last update Fri Apr 24 03:45:54 2015 Jean-Baptiste Grégoire
 //
 
 #include <sstream>
@@ -67,6 +67,33 @@ long	getRealNbr(std::string const str)
   return (nbr);
 }
 
+void			Reception::sendPizza(Pizza &pizza)
+{
+  std::vector<Kitchen*>::iterator it;
+  bool			sent = false;
+  int			pid;
+
+  for (it = _headquarters.begin(); it != _headquarters.end(); ++it)
+    {
+      if ((*it)->getFreeCooker() > 0)
+	{
+	  (*it)->addOnePizza(pizza);
+	  sent = true;
+	  break;
+	}
+    }
+  if (!sent)
+    {
+      _headquarters.push_back(new Kitchen(_nb_cooker, _mult, _stock_time));
+      if ((pid = fork()) == -1)
+	throw PlazzaErrorRuntime("fork(): Can't create new kitchen !");
+      if (pid == 0)
+	_headquarters.back()->addOnePizza(pizza);
+      else
+	waitpid(pid, NULL, WNOHANG);
+    }
+}
+
 void			Reception::parseOrder(std::string &order)
 {
   std::stringstream	stream;
@@ -110,7 +137,8 @@ void			Reception::parseOrder(std::string &order)
 	{
 	  for (unsigned long i; i != nbr; i++)
 	    {
-	      new Pizza(_typePizza[type], _sizePizza[size], _timePizza[type]); // creation de la pizza
+	      Pizza *tmp = new Pizza(_typePizza[type], _sizePizza[size], _timePizza[type]); // creation de la pizza
+	      sendPizza(*tmp);
 	    }
 	}
     }
@@ -170,7 +198,6 @@ void		Reception::getInput()
       for (size_t i = 0; i != buf.length(); i++)
 	wprintw(_input, " ");
       wmove(_input, _curs_y, _curs_x);
-      nPipe << buf;
     }
   _quit = true;
   _display.waitThread();
@@ -185,7 +212,7 @@ void			Reception::getOutput() const
   while (nPipe.is_good() && !_quit)
     {
       nPipe >> buf;
-      mvwprintw(_output, i, 5, "*** %s ***", buf.c_str());
+      mvwprintw(_output, i, 5, "%s", buf.c_str());
       wrefresh(_output);
       i++;
     }

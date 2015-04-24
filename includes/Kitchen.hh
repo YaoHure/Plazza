@@ -5,7 +5,7 @@
 // Login   <prenat_h@epitech.eu>
 //
 // Started on  Fri Apr 17 15:27:59 2015 Hugo Prenat
-// Last update Thu Apr 23 17:17:10 2015 Hugo Prenat
+// Last update Fri Apr 24 03:33:07 2015 Jean-Baptiste Grégoire
 //
 
 #ifndef KITCHEN_HH_
@@ -32,6 +32,7 @@ public:
 
 public:
   bool					addOnePizza(Pizza &pizza);
+  void					regenIngredients();
 
 private:
   unsigned int				_nbCooker;
@@ -42,6 +43,7 @@ private:
   int					_stock_time;
   std::vector<Pizza *>			_order;
   std::vector<Ingredients *>		_ingredients;
+  EThread				_regen;
 };
 
 typedef struct
@@ -51,5 +53,6 @@ typedef struct
 }		cookerArgs;
 
 void				*startCreatePizza(void *p);
+void				*startRegenIngredients(void *p);
 
 #endif // !KITCHEN_HH_

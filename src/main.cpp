@@ -5,16 +5,11 @@
 // Login   <prenat_h@epitech.eu>
 //
 // Started on  Fri Apr 17 20:57:20 2015 Hugo Prenat
-// Last update Thu Apr 23 22:53:35 2015 Jean-Baptiste Grégoire
+// Last update Fri Apr 24 02:28:07 2015 Jean-Baptiste Grégoire
 //
 
 #include <iostream>
 #include <cstdlib>
-
-// TEMPORARY --> for the function sleep
-#include <unistd.h>
-// // // //
-
 #include "Error.hh"
 #include "Reception.hh"
 

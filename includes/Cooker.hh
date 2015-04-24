@@ -5,7 +5,7 @@
 // Login   <prenat_h@epitech.eu>
 //
 // Started on  Thu Apr 16 17:09:52 2015 Hugo Prenat
-// Last update Thu Apr 23 17:18:40 2015 Hugo Prenat
+// Last update Fri Apr 24 03:43:25 2015 Jean-Baptiste Grégoire
 //
 
 #ifndef COOKER_HH_
@@ -14,6 +14,7 @@
 # include <string>
 
 # include "Kitchen.hh"
+# include "NamedPipe.hh"
 
 class		Cooker
 {

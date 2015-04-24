@@ -1,0 +1,4 @@
+Encapsulation de fork
+Améliorer la communication reception - kitchen (en faisant de la sérialisation dans un premier temps): Pour le moment on fait (vraiment) n'importe quoi car on fork à l'arrache.
+Ce que l'on doit faire c'est que lorsqu'on recoit une pizza à faire, on demande à la kitchen (si il a au moins une) de la faire. La kitchen réponds oui / non et en fonction de la réponse
+on créer une nouvelle Kitchen.

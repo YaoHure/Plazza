@@ -5,7 +5,7 @@
 // Login   <prenat_h@epitech.eu>
 //
 // Started on  Fri Apr 17 15:28:13 2015 Hugo Prenat
-// Last update Thu Apr 23 17:15:56 2015 Hugo Prenat
+// Last update Fri Apr 24 03:34:55 2015 Jean-Baptiste Grégoire
 //
 
 #include "Kitchen.hh"
@@ -14,7 +14,7 @@ Kitchen::Kitchen(unsigned int nbCooker, float mult, int stock_time) :
   _nbCooker(nbCooker), _nbPizza(0), _capacity(2 * nbCooker), _cookers(nbCooker),
   _mult(mult), _stock_time(stock_time)
 {
-
+  _regen.launch(startRegenIngredients, this);
 }
 
 bool			Kitchen::addOnePizza(Pizza &pizza)
@@ -50,6 +50,25 @@ int				Kitchen::getStockTime() const
   return (_stock_time);
 }
 
+void				Kitchen::regenIngredients()
+{
+  std::vector<Ingredients *>::iterator it;
+
+  sleep(1);
+  while (1)
+    {
+      for (it = _ingredients.begin(); it != _ingredients.end(); ++it)
+	(*it)->addIngredient();
+      usleep(_stock_time);
+    }
+}
+
 Kitchen::~Kitchen()
 {
+}
+
+void				*startRegenIngredients(void *p)
+{
+  reinterpret_cast<Kitchen *>(p)->regenIngredients();
+  return (NULL);
 }
