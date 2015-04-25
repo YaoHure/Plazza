@@ -5,7 +5,7 @@
 // Login   <jibb@epitech.net>
 //
 // Started on  Fri Apr 17 16:28:42 2015 Jean-Baptiste Grégoire
-// Last update Sat Apr 25 21:55:08 2015 Jean-Baptiste Grégoire
+// Last update Sat Apr 25 22:04:04 2015 Jean-Baptiste Grégoire
 //
 
 #include <sstream>
@@ -153,6 +153,8 @@ bool      Reception::launchUI()
   wrefresh(_input);
   if (_display.launch(startGetOutput, this) != 0)
     throw PlazzaErrorRuntime("Can't launch the output screen !");
+  if (_manage.launch(startManageOrder, this) != 0)
+    throw PlazzaErrorRuntime("Can't launch the Pizzeria !");
   return (true);
 }
 
@@ -184,6 +186,7 @@ void		Reception::getInput()
     }
   _quit = true;
   _display.waitThread();
+  _manage.waitThread();
 }
 
 void			Reception::getOutput() const
@@ -205,12 +208,18 @@ void		Reception::manageOrder()
 {
   std::string	queu;
 
-  while ((queu = _orders.front()) != "quit")
+  while (42)
     {
-      parseOrder(queu); // factory;
+      while ((queu = _orders.front()) && queu != "" && queu != "quit")
+	{
+	  parseOrder(queu); // factory;
+	  _orders.pop();
+	}
       _orders.pop();
+      if (queu == "quit")
+	return ;
+      sleep(1);
     }
-  _orders.pop();
 }
 
 Reception::~Reception()
@@ -218,6 +227,12 @@ Reception::~Reception()
   delwin(_output);
   delwin(_input);
   endwin();
+}
+
+void		*startManageOrder(void *p)
+{
+  reinterpret_cast<Reception *>(p)->manageOrder();
+  return (NULL);
 }
 
 void		*startGetOutput(void *p)
