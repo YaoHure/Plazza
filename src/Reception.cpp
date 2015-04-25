@@ -5,7 +5,7 @@
 // Login   <jibb@epitech.net>
 //
 // Started on  Fri Apr 17 16:28:42 2015 Jean-Baptiste Grégoire
-// Last update Sat Apr 25 21:35:52 2015 Jean-Baptiste Grégoire
+// Last update Sat Apr 25 21:55:08 2015 Jean-Baptiste Grégoire
 //
 
 #include <sstream>
@@ -153,7 +153,6 @@ bool      Reception::launchUI()
   wrefresh(_input);
   if (_display.launch(startGetOutput, this) != 0)
     throw PlazzaErrorRuntime("Can't launch the output screen !");
-//  refresh();
   return (true);
 }
 
