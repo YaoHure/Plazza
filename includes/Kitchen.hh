@@ -5,7 +5,7 @@
 // Login   <prenat_h@epitech.eu>
 //
 // Started on  Fri Apr 17 15:27:59 2015 Hugo Prenat
-// Last update Sat Apr 25 18:35:17 2015 Jean-Baptiste Grégoire
+// Last update Sat Apr 25 20:48:12 2015 Jean-Baptiste Grégoire
 //
 
 #ifndef KITCHEN_HH_
@@ -14,9 +14,11 @@
 # include <iostream>
 # include <string>
 # include <vector>
+# include <map>
 
 # include "Pizza.hh"
 # include "ThreadPool.hh"
+# include "NamedPipe.hh"
 
 class					Kitchen
 {

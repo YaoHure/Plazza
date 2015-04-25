@@ -5,7 +5,7 @@
 // Login   <prenat_h@epitech.eu>
 //
 // Started on  Fri Apr 17 15:28:13 2015 Hugo Prenat
-// Last update Sat Apr 25 19:22:12 2015 Jean-Baptiste Grégoire
+// Last update Sat Apr 25 21:01:02 2015 Jean-Baptiste Grégoire
 //
 
 #include "Kitchen.hh"
@@ -104,28 +104,29 @@ void			Kitchen::run()
 
   while (42)
     {
-      _fromRec >> pizza;
-      if (_capacity - nbPizza > 0)
+      *_fromRec >> pizza;
+      if (_capacity - _nbPizza > 0)
 	{
 	  type = pizza.substr(0, pizza.find(" "));
-	  size = pizza.substr(pizza.find(" ") + 1, pizza.end());
+	  size = pizza.substr(pizza.find(" ") + 1, pizza.length());
 	  Pizza *pizza = new Pizza(_typePizza[type], _sizePizza[size], _timePizza[type]);
+	  addOnePizza(*pizza);
 	  _nbPizza += 1;
-	  _toRec << "OK";
+	  *_toRec << "OK";
 	}
       else
-	_toRec << "KO";
+	*_toRec << "KO";
     }
 }
 
 Kitchen::~Kitchen()
 {
+  delete _fromRec;
+  delete _toRec;
 }
 
 void				*startRegenIngredients(void *p)
 {
-  delete _fromRec;
-  delete _toRec;
   reinterpret_cast<Kitchen *>(p)->regenIngredients();
   return (NULL);
 }

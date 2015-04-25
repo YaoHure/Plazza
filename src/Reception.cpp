@@ -5,7 +5,7 @@
 // Login   <jibb@epitech.net>
 //
 // Started on  Fri Apr 17 16:28:42 2015 Jean-Baptiste Grégoire
-// Last update Sat Apr 25 18:30:02 2015 Jean-Baptiste Grégoire
+// Last update Sat Apr 25 21:35:52 2015 Jean-Baptiste Grégoire
 //
 
 #include <sstream>
@@ -53,12 +53,12 @@ void			Reception::sendOrder(std::string const &type, std::string const &size)
   std::string		answer;
   pid_t			pid;
   Kitchen		*kitchen;
-  sts::stringstream	ss;
+  std::stringstream	ss;
 
   for (it = _toKitchen.begin(); it != _toKitchen.end(); ++it)
     {
-      (*it) << type + " " + size;
-      (*it) >> answer;
+      *(*it) << (type + " " + size);
+      *(*it) >> answer;
       if (answer == "OK")
 	return ;
     }
@@ -67,7 +67,7 @@ void			Reception::sendOrder(std::string const &type, std::string const &size)
   if (pid == 0)
     {
       kitchen = new Kitchen(_nb_cooker, _mult, _stock_time);
-      kitchen.run();
+      kitchen->run();
       delete kitchen;
     }
   else
