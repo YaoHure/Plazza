@@ -5,7 +5,7 @@
 // Login   <prenat_h@epitech.eu>
 //
 // Started on  Fri Apr 17 15:28:13 2015 Hugo Prenat
-// Last update Sat Apr 25 18:09:45 2015 Jean-Baptiste Grégoire
+// Last update Sat Apr 25 19:22:12 2015 Jean-Baptiste Grégoire
 //
 
 #include "Kitchen.hh"
@@ -21,6 +21,15 @@ Kitchen::Kitchen(unsigned int nbCooker, float mult, int stock_time) :
   std::string	fantasia[] = {"Doe", "Tomato", "Eggplant", "GoatCheese",
 			      "ChiefLove", ""};
 
+  _typePizza["Regina"] = Regina;
+  _typePizza["Margarita"] = Margarita;
+  _typePizza["Americaine"] = Americaine;
+  _typePizza["Fantasia"] = Fantasia;
+  _sizePizza["S"] = S;
+  _sizePizza["M"] = M;
+  _sizePizza["L"] = L;
+  _sizePizza["XL"] = XL;
+  _sizePizza["XXL"] = XXL;
   _timePizza["margarita"] = 1 * _mult;
   _timePizza["regina"] = 2 * _mult;
   _timePizza["americaine"] = 2 * _mult;
@@ -90,13 +99,17 @@ void				Kitchen::regenIngredients()
 void			Kitchen::run()
 {
   std::string		pizza;
+  std::string		type;
+  std::string		size;
 
   while (42)
     {
       _fromRec >> pizza;
       if (_capacity - nbPizza > 0)
 	{
-	  Pizza *pizza = new Pizza;
+	  type = pizza.substr(0, pizza.find(" "));
+	  size = pizza.substr(pizza.find(" ") + 1, pizza.end());
+	  Pizza *pizza = new Pizza(_typePizza[type], _sizePizza[size], _timePizza[type]);
 	  _nbPizza += 1;
 	  _toRec << "OK";
 	}

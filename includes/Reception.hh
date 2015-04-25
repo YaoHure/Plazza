@@ -5,7 +5,7 @@
 // Login   <jibb@epitech.net>
 //
 // Started on  Fri Apr 17 16:28:27 2015 Jean-Baptiste Grégoire
-// Last update Sat Apr 25 18:15:25 2015 Jean-Baptiste Grégoire
+// Last update Sat Apr 25 18:24:30 2015 Jean-Baptiste Grégoire
 //
 
 #ifndef RECEPTION_HH_
@@ -22,6 +22,7 @@
 # include <queue>
 # include <cerrno>
 # include <sstream>
+# include <algorithm>
 
 # include "Plazza.hh"
 # include "NamedPipe.hh"

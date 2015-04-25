@@ -5,7 +5,7 @@
 // Login   <prenat_h@epitech.eu>
 //
 // Started on  Fri Apr 17 15:27:59 2015 Hugo Prenat
-// Last update Sat Apr 25 18:10:08 2015 Jean-Baptiste Grégoire
+// Last update Sat Apr 25 18:35:17 2015 Jean-Baptiste Grégoire
 //
 
 #ifndef KITCHEN_HH_
@@ -47,7 +47,9 @@ private:
   std::vector<Pizza *>			_order;
   std::vector<Ingredients *>		_ingredients;
   std::map<std::string, std::vector<Ingredients*> >	_ingredientList;
-  std::map<std::string, int>				_timePizza;
+  std::map<std::string, TypePizza>	_typePizza;
+  std::map<std::string, TaillePizza>	_sizePizza;
+  std::map<std::string, int>		_timePizza;
   EThread				_regen;
   NamedPipe				*_fromRec;
   NamedPipe				*_toRec;

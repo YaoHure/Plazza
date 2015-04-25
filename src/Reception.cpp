@@ -5,7 +5,7 @@
 // Login   <jibb@epitech.net>
 //
 // Started on  Fri Apr 17 16:28:42 2015 Jean-Baptiste Grégoire
-// Last update Sat Apr 25 18:17:07 2015 Jean-Baptiste Grégoire
+// Last update Sat Apr 25 18:30:02 2015 Jean-Baptiste Grégoire
 //
 
 #include <sstream>
@@ -102,12 +102,12 @@ void			Reception::parseOrder(std::string &order)
       stream >> type;
       stream >> size;
       stream >> str_nbr;
-      if (_typePizza[type] == 0)
+      if (find(_typePizza.begin(), _typePizza.end(), type) == _typePizza.end())
 	{
 	  std::cerr << "Invalid type of pizza : " << type << std::endl;
 	  good = false;
 	}
-      if (_sizePizza[size] == 0)
+      if (find(_sizePizza.begin(), _sizePizza.end(), size) == _sizePizza.end())
 	{
 	  std::cerr << "Invalid size of pizza : " << size << std::endl;
 	  good = false;
