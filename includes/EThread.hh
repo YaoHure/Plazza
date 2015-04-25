@@ -5,7 +5,7 @@
 // Login   <jean-baptiste.gregoire@epitech.net>
 //
 // Started on  Sat Apr  18 11:49:21 2015 Jean-Baptiste Grégoire
-// Last update Sat Apr  18 11:49:21 2015 Jean-Baptiste Grégoire
+// Last update Sat Apr 25 21:38:20 2015 David Tran
 //
 
 #ifndef ETHREAD_HH
@@ -23,10 +23,10 @@ public:
   bool	is_running() const;
   int		waitThread();
   ~EThread();
- 
+
 private:
   pthread_t	_thread;
-  bool		_running; 
+  bool		_running;
 };
 
 #endif // !ETHREAD_HH
