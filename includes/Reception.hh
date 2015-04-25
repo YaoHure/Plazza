@@ -5,7 +5,7 @@
 // Login   <jibb@epitech.net>
 //
 // Started on  Fri Apr 17 16:28:27 2015 Jean-Baptiste Grégoire
-// Last update Sat Apr 25 19:32:02 2015 Jean-Baptiste Grégoire
+// Last update Sat Apr 25 21:39:18 2015 David Tran
 //
 
 #ifndef RECEPTION_HH_
@@ -68,6 +68,7 @@ private:
   std::queue<std::string>	_orders;
   bool				_quit;
   EThread			_display;
+  EThread			_manage;
 };
 
 void		*startGetOutput(void *p);
