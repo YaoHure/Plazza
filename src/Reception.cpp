@@ -5,7 +5,7 @@
 // Login   <jibb@epitech.net>
 //
 // Started on  Fri Apr 17 16:28:42 2015 Jean-Baptiste Grégoire
-// Last update Sat Apr 25 22:04:04 2015 Jean-Baptiste Grégoire
+// Last update Sat Apr 25 22:18:38 2015 Jean-Baptiste Grégoire
 //
 
 #include <sstream>
@@ -27,10 +27,11 @@ Reception::Reception(float mult, int nb_cooker, int stock_time) :
   _quit = false;
 }
 
-long	getRealNbr(std::string const str)
+long			getRealNbr(std::string const str)
 {
-  long	nbr = 0;
-  int	i = 1;
+  long			nbr = 0;
+  int			i = 1;
+  std::stringstream	ss_nbr;
 
   if (str[0] != 'x')
     return (-1);
@@ -44,6 +45,8 @@ long	getRealNbr(std::string const str)
 	return (-1);
       i++;
     }
+  ss_nbr << str.substr(1, str.length());
+  ss_nbr >> nbr;
   return (nbr);
 }
 
@@ -210,14 +213,16 @@ void		Reception::manageOrder()
 
   while (42)
     {
-      while ((queu = _orders.front()) && queu != "" && queu != "quit")
+      while (!_orders.empty() && (queu = _orders.front()) != "quit")
 	{
 	  parseOrder(queu); // factory;
 	  _orders.pop();
 	}
-      _orders.pop();
       if (queu == "quit")
-	return ;
+	{
+	  _orders.pop();
+	  return ;
+	}
       sleep(1);
     }
 }

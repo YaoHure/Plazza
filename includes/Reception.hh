@@ -5,7 +5,7 @@
 // Login   <jibb@epitech.net>
 //
 // Started on  Fri Apr 17 16:28:27 2015 Jean-Baptiste Grégoire
-// Last update Sat Apr 25 21:39:18 2015 David Tran
+// Last update Sat Apr 25 22:04:51 2015 Jean-Baptiste Grégoire
 //
 
 #ifndef RECEPTION_HH_
@@ -72,5 +72,6 @@ private:
 };
 
 void		*startGetOutput(void *p);
+void		*startManageOrder(void *p);
 
 #endif // !RECEPTION_HH_
