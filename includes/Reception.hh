@@ -5,7 +5,7 @@
 // Login   <jibb@epitech.net>
 //
 // Started on  Fri Apr 17 16:28:27 2015 Jean-Baptiste Grégoire
-// Last update Fri Apr 24 03:43:49 2015 Jean-Baptiste Grégoire
+// Last update Sat Apr 25 18:15:25 2015 Jean-Baptiste Grégoire
 //
 
 #ifndef RECEPTION_HH_
@@ -21,6 +21,7 @@
 # include <curses.h>
 # include <queue>
 # include <cerrno>
+# include <sstream>
 
 # include "Plazza.hh"
 # include "NamedPipe.hh"
@@ -42,9 +43,7 @@ public:
   void							getInput();
   void							getOutput() const;
   void							manageOrder();
-  void							sendPizza(Pizza &pizza);
-  void							putIngredient(std::string const &name,
-								      std::string list[]);
+  void							sendOrder(std::string const &type, std::string const &size);
 
 private:
   void							parseOrder(std::string &order);
@@ -53,11 +52,10 @@ private:
   float							_mult;
   int							_nb_cooker;
   int							_stock_time;
-  std::map<std::string, TypePizza>			_typePizza;
-  std::map<std::string, TaillePizza>			_sizePizza;
-  std::map<std::string, std::vector<Ingredients*> >	_ingredientList;
-  std::map<std::string, int>				_timePizza;
-  std::vector<Kitchen *>				_headquarters;
+  std::map<std::string>					_typePizza;
+  std::map<std::string>					_sizePizza;
+  std::vector<NamedPipe *>				_toKitchen;
+  std::vector<NamedPipe *>				_fromKitchen;
   WINDOW						*_screen;
   WINDOW						*_output;
   WINDOW						*_input;

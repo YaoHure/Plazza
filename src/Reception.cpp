@@ -5,7 +5,7 @@
 // Login   <jibb@epitech.net>
 //
 // Started on  Fri Apr 17 16:28:42 2015 Jean-Baptiste Grégoire
-// Last update Fri Apr 24 03:45:54 2015 Jean-Baptiste Grégoire
+// Last update Sat Apr 25 18:17:07 2015 Jean-Baptiste Grégoire
 //
 
 #include <sstream>
@@ -15,36 +15,16 @@
 Reception::Reception(float mult, int nb_cooker, int stock_time) :
   _mult(mult), _nb_cooker(nb_cooker), _stock_time(stock_time)
 {
-  std::string	margarita[] = {"Doe", "Tomato", "Gruyere", ""};
-  std::string	regina[] = {"Doe", "Tomato", "Gruyere", "Ham", "Mushrooms", ""};
-  std::string	americaine[] = {"Doe", "Tomato", "Gruyere", "Steak", ""};
-  std::string	fantasia[] = {"Doe", "Tomato", "Eggplant", "GoatCheese",
-			      "ChiefLove", ""};
-
-  _typePizza["margarita"] = Margarita;
-  _typePizza["regina"] = Regina;
-  _typePizza["americaine"] = Americaine;
-  _typePizza["fantasia"] = Fantasia;
-  _sizePizza["S"] = S;
-  _sizePizza["M"] = M;
-  _sizePizza["L"] = L;
-  _sizePizza["XL"] = XL;
-  _sizePizza["XXL"] = XXL;
-  _timePizza["margarita"] = 1 * _mult;
-  _timePizza["regina"] = 2 * _mult;
-  _timePizza["americaine"] = 2 * _mult;
-  _timePizza["fantasia"] = 4 * _mult;
-  putIngredient("margarita", margarita);
-  putIngredient("regina", regina);
-  putIngredient("americaine", americaine);
-  putIngredient("fantasia", fantasia);
+  _typePizza.push_back("margarita");
+  _typePizza.push_back("regina");
+  _typePizza.push_back("americaine");
+  _typePizza.push_back("fantasia");
+  _sizePizza.push_back("S");
+  _sizePizza.push_back("M");
+  _sizePizza.push_back("L");
+  _sizePizza.push_back("XL");
+  _sizePizza.push_back("XXL");
   _quit = false;
-}
-
-void	Reception::putIngredient(std::string const &name, std::string list[])
-{
-  for (int i = 0; list[i] != ""; i++)
-    _ingredientList[name].push_back(new Ingredients(list[i]));
 }
 
 long	getRealNbr(std::string const str)
@@ -67,30 +47,35 @@ long	getRealNbr(std::string const str)
   return (nbr);
 }
 
-void			Reception::sendPizza(Pizza &pizza)
+void			Reception::sendOrder(std::string const &type, std::string const &size)
 {
-  std::vector<Kitchen*>::iterator it;
-  bool			sent = false;
-  int			pid;
+  std::vector<NamedPipe *>::iterator it;
+  std::string		answer;
+  pid_t			pid;
+  Kitchen		*kitchen;
+  sts::stringstream	ss;
 
-  for (it = _headquarters.begin(); it != _headquarters.end(); ++it)
+  for (it = _toKitchen.begin(); it != _toKitchen.end(); ++it)
     {
-      if ((*it)->getFreeCooker() > 0)
-	{
-	  (*it)->addOnePizza(pizza);
-	  sent = true;
-	  break;
-	}
+      (*it) << type + " " + size;
+      (*it) >> answer;
+      if (answer == "OK")
+	return ;
     }
-  if (!sent)
+  if ((pid = fork()) == -1)
+    throw PlazzaErrorRuntime("fork(): Can't create the new kitchen !");
+  if (pid == 0)
     {
-      _headquarters.push_back(new Kitchen(_nb_cooker, _mult, _stock_time));
-      if ((pid = fork()) == -1)
-	throw PlazzaErrorRuntime("fork(): Can't create new kitchen !");
-      if (pid == 0)
-	_headquarters.back()->addOnePizza(pizza);
-      else
-	waitpid(pid, NULL, WNOHANG);
+      kitchen = new Kitchen(_nb_cooker, _mult, _stock_time);
+      kitchen.run();
+      delete kitchen;
+    }
+  else
+    {
+      ss << pid;
+      _toKitchen.push_back(new NamedPipe(ss.str() + "_toKitchen"));
+      _fromKitchen.push_back(new NamedPipe(ss.str() + "_fromKitchen"));
+      waitpid(pid, NULL, WNOHANG);
     }
 }
 
@@ -111,7 +96,7 @@ void			Reception::parseOrder(std::string &order)
       pos += 3;
     }
   stream << order;
-  for (size_t i; i <= semi_nbr; i++)
+  for (size_t i = 0; i <= semi_nbr; i++)
     {
       good = true;
       stream >> type;
@@ -135,10 +120,9 @@ void			Reception::parseOrder(std::string &order)
       stream >> str_nbr;
       if (good)
 	{
-	  for (unsigned long i; i != nbr; i++)
+	  for (unsigned long i = 0; i != nbr; i++)
 	    {
-	      Pizza *tmp = new Pizza(_typePizza[type], _sizePizza[size], _timePizza[type]); // creation de la pizza
-	      sendPizza(*tmp);
+	      sendOrder(type, size);
 	    }
 	}
     }
