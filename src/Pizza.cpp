@@ -5,7 +5,7 @@
 // Login   <jean-baptiste.gregoire@epitech.net>
 //
 // Started on  Fri Apr  17 15:41:12 2015 Jean-Baptiste Grégoire
-// Last update Sun Apr 26 02:57:20 2015 David Tran
+// Last update Sun Apr 26 04:47:40 2015 David Tran
 //
 
 #include "Pizza.hh"
@@ -42,7 +42,6 @@ bool	Pizza::cook(float mult) const
   float	tmp = mult * static_cast<float>(_time);
   int	bake_time = static_cast<int>(tmp * 10000.0);
 
-  std::cout << bake_time << std::endl;
   usleep(bake_time);
   return (true);
 }

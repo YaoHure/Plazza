@@ -5,7 +5,7 @@
 // Login   <jibb@epitech.net>
 //
 // Started on  Fri Apr 17 16:28:42 2015 Jean-Baptiste Grégoire
-// Last update Sun Apr 26 03:59:05 2015 David Tran
+// Last update Sun Apr 26 05:06:16 2015 David Tran
 //
 
 #include <sstream>
@@ -61,7 +61,11 @@ void			Reception::sendOrder(std::string const &type, std::string const &size)
   for (it = _toKitchen.begin(); it != _toKitchen.end(); ++it)
     {
       *(*it) << (type + " " + size);
+      std::cout << "test of send" << std::endl;
+      std::cout << "test of send" << std::endl;
+      std::cout << "test of send" << std::endl;
       *(*it) >> answer;
+      std::cout << "out of send" << std::endl;
       if (answer == "OK")
 	return ;
     }
@@ -72,12 +76,15 @@ void			Reception::sendOrder(std::string const &type, std::string const &size)
       kitchen = new Kitchen(_nb_cooker, _mult, _stock_time);
       kitchen->run();
       delete kitchen;
+      exit(EXIT_SUCCESS);
     }
   else
     {
       ss << pid;
       _toKitchen.push_back(new NamedPipe(ss.str() + "_toKitchen"));
       _fromKitchen.push_back(new NamedPipe(ss.str() + "_fromKitchen"));
+      *(*_toKitchen.begin()) << (type + " " + size);
+      *(*_fromKitchen.begin()) >> answer;
       waitpid(pid, NULL, WNOHANG);
     }
 }
