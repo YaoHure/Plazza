@@ -5,7 +5,7 @@
 // Login   <prenat_h@epitech.eu>
 //
 // Started on  Fri Apr 17 20:57:20 2015 Hugo Prenat
-// Last update Sun Apr 26 04:27:02 2015 Jean-Baptiste Grégoire
+// Last update Sun Apr 26 15:43:23 2015 David Tran
 //
 
 #include <iostream>
@@ -43,6 +43,8 @@ Reception	*checkArg(int argc, char **argv)
     throw PlazzaErrorArg("Error: [nb_cooker] must be > 0");
   if (isParamNum(argv[3]) == 0 && (stock_time = atoi(argv[3])) <= 0)
     throw PlazzaErrorArg("Error: [stock_time] must be > 0");
+  if (mult == 0)
+    mult = 1;
   rec = new Reception(mult, nb_cooker, stock_time);
   return (rec);
 }
