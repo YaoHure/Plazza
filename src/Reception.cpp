@@ -5,7 +5,7 @@
 // Login   <jibb@epitech.net>
 //
 // Started on  Fri Apr 17 16:28:42 2015 Jean-Baptiste Grégoire
-// Last update Sun Apr 26 11:12:10 2015 David Tran
+// Last update Sun Apr 26 11:13:02 2015 David Tran
 //
 
 #include <sstream>
@@ -167,7 +167,7 @@ void		Reception::getInput()
   std::string	buf;
   char	c;
 
-  while (buf != "quit\n")
+  while (buf != "quit")
     {
       buf.clear();
       c = 0;
@@ -217,7 +217,7 @@ void		Reception::manageOrder()
 {
   std::string	queu;
 
-  while (42)
+  while (!_quit)
     {
       while (!_orders.empty() && (queu = _orders.front()) != "quit\n")
 	{
@@ -235,6 +235,16 @@ void		Reception::manageOrder()
 
 Reception::~Reception()
 {
+  while (!_toKitchen.empty())
+    {
+      delete _toKitchen.back();
+      _toKitchen.pop_back();
+    }
+  while (!_fromKitchen.empty())
+    {
+      delete _fromKitchen.back();
+      _fromKitchen.pop_back();
+    }
   delwin(_output);
   delwin(_input);
   endwin();
