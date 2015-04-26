@@ -5,7 +5,7 @@
 // Login   <jibb@epitech.net>
 //
 // Started on  Fri Apr 17 16:28:42 2015 Jean-Baptiste Grégoire
-// Last update Sun Apr 26 05:48:46 2015 David Tran
+// Last update Sun Apr 26 10:22:34 2015 David Tran
 //
 
 #include <sstream>
@@ -50,12 +50,19 @@ long			getRealNbr(std::string const str)
   return (nbr);
 }
 
+void			Reception::createKitchen()
+{
+  Kitchen		*kitchen;
+
+  kitchen = new Kitchen(_nb_cooker, _mult, _stock_time);
+  kitchen->run();
+  delete kitchen;
+}
+
 void			Reception::sendOrder(std::string const &type, std::string const &size)
 {
   std::vector<NamedPipe *>::iterator it;
   std::string		answer;
-  pid_t			pid;
-  Kitchen		*kitchen;
   std::stringstream	ss;
 
   for (it = _toKitchen.begin(); it != _toKitchen.end(); ++it)
@@ -65,24 +72,13 @@ void			Reception::sendOrder(std::string const &type, std::string const &size)
       if (answer == "OK")
 	return ;
     }
-  if ((pid = fork()) == -1)
+  if (_callKitchen.launch(son_fork, this) == -1)
     throw PlazzaErrorRuntime("fork(): Can't create the new kitchen !");
-  if (pid == 0)
-    {
-      kitchen = new Kitchen(_nb_cooker, _mult, _stock_time);
-      kitchen->run();
-      delete kitchen;
-      exit(EXIT_SUCCESS);
-    }
-  else
-    {
-      ss << pid;
-      _toKitchen.push_back(new NamedPipe(ss.str() + "_toKitchen"));
-      _fromKitchen.push_back(new NamedPipe(ss.str() + "_fromKitchen"));
-      *(*_toKitchen.begin()) << (type + " " + size);
-      *(*_fromKitchen.begin()) >> answer;
-      waitpid(pid, NULL, WNOHANG);
-    }
+  ss << _callKitchen.getPid();
+  _toKitchen.push_back(new NamedPipe(ss.str() + "_toKitchen"));
+  _fromKitchen.push_back(new NamedPipe(ss.str() + "_fromKitchen"));
+  *(*_toKitchen.begin()) << (type + " " + size);
+  *(*_fromKitchen.begin()) >> answer;
 }
 
 void			Reception::parseOrder(std::string &order)
