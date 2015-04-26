@@ -5,7 +5,7 @@
 // Login   <jibb@epitech.net>
 //
 // Started on  Fri Apr 17 16:28:27 2015 Jean-Baptiste Grégoire
-// Last update Sat Apr 25 22:04:51 2015 Jean-Baptiste Grégoire
+// Last update Sun Apr 26 10:30:23 2015 David Tran
 //
 
 #ifndef RECEPTION_HH_
@@ -30,8 +30,11 @@
 # include "Ingredients.hh"
 # include "Pizza.hh"
 # include "Kitchen.hh"
+# include "EFork.hh"
 
 # define	BUFF_SIZE	256
+
+class	EFork;
 
 class				Reception
 {
@@ -45,7 +48,7 @@ public:
   void				getOutput() const;
   void				manageOrder();
   void				sendOrder(std::string const &type, std::string const &size);
-
+  void				createKitchen();
 private:
   void				parseOrder(std::string &order);
 
@@ -69,9 +72,11 @@ private:
   bool				_quit;
   EThread			_display;
   EThread			_manage;
+  EFork				_callKitchen;
 };
 
 void		*startGetOutput(void *p);
 void		*startManageOrder(void *p);
+void		son_fork(void *);
 
 #endif // !RECEPTION_HH_

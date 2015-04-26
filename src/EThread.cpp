@@ -5,7 +5,7 @@
 // Login   <jean-baptiste.gregoire@epitech.net>
 //
 // Started on  Sat Apr  18 11:58:53 2015 Jean-Baptiste Grégoire
-// Last update Sun Apr 26 07:31:28 2015 Jean-Baptiste Grégoire
+// Last update Sun Apr 26 10:33:04 2015 David Tran
 //
 
 #include "EThread.hh"
