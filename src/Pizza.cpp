@@ -5,7 +5,7 @@
 // Login   <jean-baptiste.gregoire@epitech.net>
 //
 // Started on  Fri Apr  17 15:41:12 2015 Jean-Baptiste Grégoire
-// Last update Sun Apr 26 01:18:30 2015 Jean-Baptiste Grégoire
+// Last update Sun Apr 26 02:57:20 2015 David Tran
 //
 
 #include "Pizza.hh"
@@ -40,8 +40,9 @@ std::vector<Ingredients *> const	*Pizza::getIngredients() const
 bool	Pizza::cook(float mult) const
 {
   float	tmp = mult * static_cast<float>(_time);
-  int	bake_time = static_cast<int>(tmp * 1000000.0);
+  int	bake_time = static_cast<int>(tmp * 10000.0);
 
+  std::cout << bake_time << std::endl;
   usleep(bake_time);
   return (true);
 }

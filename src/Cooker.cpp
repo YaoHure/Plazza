@@ -5,7 +5,7 @@
 // Login   <prenat_h@epitech.eu>
 //
 // Started on  Fri Apr 17 15:26:41 2015 Hugo Prenat
-// Last update Sun Apr 26 02:23:53 2015 Jean-Baptiste Grégoire
+// Last update Sun Apr 26 03:59:38 2015 David Tran
 //
 
 #include "Cooker.hh"
@@ -48,7 +48,6 @@ bool				Cooker::createPizza(Pizza const *pizza)
   NamedPipe			_output(FIFO_OUTPUT);
 
   // mutex lock
-  std::cout << "coucou" << std::endl;
   while (manageIngredient(pizza, CHECK) == false)
     sleep(1);
   manageIngredient(pizza, GET);
