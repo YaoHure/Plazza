@@ -5,7 +5,7 @@
 // Login   <jean-baptiste.gregoire@epitech.net>
 //
 // Started on  Fri Apr  17 18:10:22 2015 Jean-Baptiste Grégoire
-// Last update Sun Apr 26 07:47:19 2015 Jean-Baptiste Grégoire
+// Last update Sun Apr 26 18:08:35 2015 Jean-Baptiste Grégoire
 //
 
 #include "ThreadPool.hh"

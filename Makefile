@@ -5,10 +5,10 @@
 ## Login   <jibb@epitech.net>
 ##
 ## Started on  Tue Apr 14 09:31:37 2015 Jean-Baptiste Grégoire
-## Last update Sun Apr 26 10:23:32 2015 David Tran
+## Last update Sun Apr 26 19:12:20 2015 Jean-Baptiste Grégoire
 ##
 
-DEBUG		= 	yes
+DEBUG		= 	no
 
 NAME		=	plazza
 

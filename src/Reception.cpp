@@ -5,7 +5,7 @@
 // Login   <jibb@epitech.net>
 //
 // Started on  Fri Apr 17 16:28:42 2015 Jean-Baptiste Grégoire
-// Last update Sun Apr 26 17:38:31 2015 Jean-Baptiste Grégoire
+// Last update Sun Apr 26 18:57:08 2015 Jean-Baptiste Grégoire
 //
 
 #include <sstream>
@@ -124,9 +124,7 @@ void			Reception::parseOrder(std::string &order)
       if (good)
 	{
 	  for (unsigned long i = 0; i != nbr; i++)
-	    {
-	      sendOrder(type, size);
-	    }
+	    sendOrder(type, size);
 	}
     }
 }
@@ -222,11 +220,14 @@ void		Reception::manageOrder()
     {
       while (!_orders.empty() && (queu = _orders.front()) != "quit\n")
 	{
-	  parseOrder(queu); // factory;
+	  parseOrder(queu);
 	  _orders.pop();
 	}
       if (queu == "quit\n")
 	{
+	  std::vector<NamedPipe *>::iterator it;
+	  for (it = _toKitchen.begin(); it != _toKitchen.end(); ++it)
+	    *(*it) << "quit";
 	  _orders.pop();
 	  return ;
 	}

@@ -5,7 +5,7 @@
 // Login   <jibb@epitech.net>
 //
 // Started on  Mon Apr 20 19:06:03 2015 Jean-Baptiste Grégoire
-// Last update Sun Apr 26 08:39:18 2015 Jean-Baptiste Grégoire
+// Last update Sun Apr 26 19:08:09 2015 Jean-Baptiste Grégoire
 //
 
 #include "NamedPipe.hh"

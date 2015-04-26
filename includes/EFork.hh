@@ -1,11 +1,11 @@
 //
 // EFork.hh for EFork in /home/tran_0/rendu/cpp_plazza
-// 
+//
 // Made by David Tran
 // Login   <tran_0@epitech.net>
-// 
+//
 // Started on  Sun Apr 26 07:43:28 2015 David Tran
-// Last update Sun Apr 26 10:31:31 2015 David Tran
+// Last update Sun Apr 26 18:52:44 2015 Jean-Baptiste Grégoire
 //
 
 #ifndef EFORK_HH_
@@ -25,10 +25,15 @@ public:
   ~EFork();
 public:
   int		launch(void (*routine)(void *), void *args);
+  void		waitFork();
+
+public:
   pid_t		getPid() const;
-  void		waitFork() const;
+  int		getStatus() const;
+
 private:
-  pid_t		pid;
+  pid_t		_pid;
+  int		_status;
 };
 
 # include "Reception.hh"

@@ -5,7 +5,7 @@
 // Login   <prenat_h@epitech.eu>
 //
 // Started on  Fri Apr 17 20:57:20 2015 Hugo Prenat
-// Last update Sun Apr 26 15:43:23 2015 David Tran
+// Last update Sun Apr 26 19:27:07 2015 Jean-Baptiste Grégoire
 //
 
 #include <iostream>
@@ -29,21 +29,33 @@ int	isParamNum(char *str)
   return (0);
 }
 
-Reception	*checkArg(int argc, char **argv)
+Reception		*checkArg(int argc, char **argv)
 {
-  Reception	*rec;
-  float		mult;
-  int		nb_cooker, stock_time;
+  Reception		*rec;
+  std::stringstream	ss;
+  float			mult(0.0);
+  int			nb_cooker(0), stock_time(0);
 
   if (argc != 4)
     throw PlazzaErrorArg("Usage: ./plazza [mult] [nb_cooker] [stock_time]");
-  if (isParamNum(argv[1]) == 0 && (mult = atof(argv[1])) < 0)
-    throw PlazzaErrorArg("Error: [mult] must be >= 0");
-  if (isParamNum(argv[2]) == 0 && (nb_cooker = atoi(argv[2])) <= 0)
-    throw PlazzaErrorArg("Error: [nb_cooker] must be > 0");
-  if (isParamNum(argv[3]) == 0 && (stock_time = atoi(argv[3])) <= 0)
-    throw PlazzaErrorArg("Error: [stock_time] must be > 0");
-  if (mult == 0)
+  if (isParamNum(argv[1]) == 0 && isParamNum(argv[2]) == 0 && isParamNum(argv[3]) == 0)
+    {
+      ss.str(std::string(argv[1]));
+      ss >> mult;
+      if (mult < 0.0)
+	throw PlazzaErrorArg("Error: [mult] must be >= 0");
+      ss.clear();
+      ss.str(std::string(argv[2]));
+      ss >> nb_cooker;
+      if (nb_cooker <= 0)
+	throw PlazzaErrorArg("Error: [nb_cooker] must be > 0");
+      ss.clear();
+      ss.str(std::string(argv[3]));
+      ss >> stock_time;
+      if (stock_time <= 0)
+	throw PlazzaErrorArg("Error: [stock_time] must be > 0");
+    }
+  if (mult == 0.f)
     mult = 1;
   rec = new Reception(mult, nb_cooker, stock_time);
   return (rec);
