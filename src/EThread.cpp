@@ -5,7 +5,7 @@
 // Login   <jean-baptiste.gregoire@epitech.net>
 //
 // Started on  Sat Apr  18 11:58:53 2015 Jean-Baptiste Grégoire
-// Last update Sun Apr 26 07:57:53 2015 David Tran
+// Last update Sun Apr 26 10:33:04 2015 David Tran
 //
 
 #include "EThread.hh"
@@ -15,7 +15,7 @@ EThread::EThread() : _running(false)
 
 }
 
-int    EThread::launch(void *(*routine)(void *), void *args)
+int	EThread::launch(void *(*routine)(void *), void *args)
 {
   _running = true;
   if (pthread_create(&_thread, NULL, routine, args) != 0)
@@ -26,12 +26,14 @@ int    EThread::launch(void *(*routine)(void *), void *args)
   return (0);
 }
 
-int   EThread::waitThread()
+int	EThread::waitThread()
 {
-  return (pthread_join(_thread, NULL));
+  int	ret = pthread_join(_thread, NULL);
+  _running = false;
+  return (ret);
 }
 
-bool  EThread::is_running() const
+bool	EThread::is_running() const
 {
   return (_running);
 }
