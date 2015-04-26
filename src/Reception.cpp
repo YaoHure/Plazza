@@ -5,7 +5,7 @@
 // Login   <jibb@epitech.net>
 //
 // Started on  Fri Apr 17 16:28:42 2015 Jean-Baptiste Grégoire
-// Last update Sun Apr 26 03:59:05 2015 David Tran
+// Last update Sun Apr 26 04:26:59 2015 Jean-Baptiste Grégoire
 //
 
 #include <sstream>
@@ -156,6 +156,7 @@ bool      Reception::launchUI()
   wrefresh(_input);
   if (_display.launch(startGetOutput, this) != 0)
     throw PlazzaErrorRuntime("Can't launch the output screen !");
+  usleep(500);
   if (_manage.launch(startManageOrder, this) != 0)
     throw PlazzaErrorRuntime("Can't launch the Pizzeria !");
   return (true);
