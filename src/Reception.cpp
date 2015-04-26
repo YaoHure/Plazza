@@ -5,7 +5,7 @@
 // Login   <jibb@epitech.net>
 //
 // Started on  Fri Apr 17 16:28:42 2015 Jean-Baptiste Grégoire
-// Last update Sun Apr 26 10:33:10 2015 David Tran
+// Last update Sun Apr 26 11:12:10 2015 David Tran
 //
 
 #include <sstream>
@@ -188,6 +188,7 @@ void		Reception::getInput()
       wmove(_input, _curs_y, _curs_x);
     }
   _quit = true;
+  nPipe << "quit";
   _display.waitThread();
   _manage.waitThread();
 }
@@ -205,6 +206,8 @@ void			Reception::getOutput() const
 	  nPipe >> buf;
 	  mvwprintw(_output, i, 5, "%s", buf.c_str());
 	  wrefresh(_output);
+	  if (buf == "quit")
+	    return ;
 	  i++;
 	}
     }
@@ -216,12 +219,12 @@ void		Reception::manageOrder()
 
   while (42)
     {
-      while (!_orders.empty() && (queu = _orders.front()) != "quit")
+      while (!_orders.empty() && (queu = _orders.front()) != "quit\n")
 	{
 	  parseOrder(queu); // factory;
 	  _orders.pop();
 	}
-      if (queu == "quit")
+      if (queu == "quit\n")
 	{
 	  _orders.pop();
 	  return ;
