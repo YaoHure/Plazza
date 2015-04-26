@@ -5,14 +5,13 @@
 // Login   <prenat_h@epitech.eu>
 //
 // Started on  Fri Apr 17 15:26:41 2015 Hugo Prenat
-// Last update Fri Apr 24 03:47:51 2015 Jean-Baptiste Grégoire
+// Last update Sun Apr 26 02:19:52 2015 Jean-Baptiste Grégoire
 //
 
 #include "Cooker.hh"
 
 Cooker::Cooker(Kitchen *kitchen) : _kitchen(kitchen)
 {
-
 }
 
 bool	Cooker::manageIngredient(Pizza const *pizza, enum Action action)
@@ -23,6 +22,8 @@ bool	Cooker::manageIngredient(Pizza const *pizza, enum Action action)
   std::vector<Ingredients *>::const_iterator kitchenIt;
   unsigned int			nbIngr(0);
 
+  if (availIngr->empty())
+    return (false);
   for (pizzaIt = requIngr->begin(); pizzaIt != requIngr->end(); ++pizzaIt)
     {
       nbIngr = 0;
@@ -48,8 +49,9 @@ bool				Cooker::createPizza(Pizza const *pizza)
 
   // mutex lock
   std::cout << "coucou" << std::endl;
-  if (manageIngredient(pizza, CHECK))
-    manageIngredient(pizza, GET);
+  while (manageIngredient(pizza, CHECK) == false)
+    sleep(1);
+  manageIngredient(pizza, GET);
   pizza->cook(_kitchen->getPreparationTime());
   _output << "Pizza finis ! (I don't have name anymore)";
   // mutex unlock
@@ -68,6 +70,7 @@ void				*startCreatePizza(void *p)
 
   cooker = new Cooker(args->kitchen);
   cooker->createPizza(args->pizza);
+  delete args;
   delete cooker;
   return (NULL);
 }

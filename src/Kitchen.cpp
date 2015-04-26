@@ -5,7 +5,7 @@
 // Login   <prenat_h@epitech.eu>
 //
 // Started on  Fri Apr 17 15:28:13 2015 Hugo Prenat
-// Last update Sat Apr 25 21:01:02 2015 Jean-Baptiste Grégoire
+// Last update Sun Apr 26 02:19:45 2015 Jean-Baptiste Grégoire
 //
 
 #include "Kitchen.hh"
@@ -15,11 +15,6 @@ Kitchen::Kitchen(unsigned int nbCooker, float mult, int stock_time) :
   _mult(mult), _stock_time(stock_time)
 {
   std::stringstream	ss;
-  std::string	margarita[] = {"Doe", "Tomato", "Gruyere", ""};
-  std::string	regina[] = {"Doe", "Tomato", "Gruyere", "Ham", "Mushrooms", ""};
-  std::string	americaine[] = {"Doe", "Tomato", "Gruyere", "Steak", ""};
-  std::string	fantasia[] = {"Doe", "Tomato", "Eggplant", "GoatCheese",
-			      "ChiefLove", ""};
 
   _typePizza["Regina"] = Regina;
   _typePizza["Margarita"] = Margarita;
@@ -34,32 +29,31 @@ Kitchen::Kitchen(unsigned int nbCooker, float mult, int stock_time) :
   _timePizza["regina"] = 2 * _mult;
   _timePizza["americaine"] = 2 * _mult;
   _timePizza["fantasia"] = 4 * _mult;
-  putIngredient("margarita", margarita);
-  putIngredient("regina", regina);
-  putIngredient("americaine", americaine);
-  putIngredient("fantasia", fantasia);
+  _ingredients.push_back(new Ingredients("Doe"));
+  _ingredients.push_back(new Ingredients("Tomato"));
+  _ingredients.push_back(new Ingredients("Gruyere"));
+  _ingredients.push_back(new Ingredients("Ham"));
+  _ingredients.push_back(new Ingredients("Mushrooms"));
+  _ingredients.push_back(new Ingredients("Steak"));
+  _ingredients.push_back(new Ingredients("Eggplant"));
+  _ingredients.push_back(new Ingredients("GoatCheese"));
+  _ingredients.push_back(new Ingredients("ChiefLove"));
   ss << getpid();
   _fromRec = new NamedPipe(ss.str() + "_toKitchen");
   _toRec = new NamedPipe(ss.str() + "_fromKitchen");
   _regen.launch(startRegenIngredients, this);
 }
 
-void			Kitchen::putIngredient(std::string const &name, std::string list[])
+bool			Kitchen::addOnePizza(Pizza *pizza)
 {
-  for (int i = 0; list[i] != ""; i++)
-    _ingredientList[name].push_back(new Ingredients(list[i]));
-}
-
-bool			Kitchen::addOnePizza(Pizza &pizza)
-{
-  cookerArgs		args;
+  cookerArgs		*args = new cookerArgs;
 
   if (_capacity - _nbPizza == 0)
     return (false);
   _nbPizza += 1;
-  args.pizza = &pizza;
-  args.kitchen = this;
-  _cookers.addWork(startCreatePizza, &args);
+  args->pizza = pizza;
+  args->kitchen = this;
+  _cookers.addWork(startCreatePizza, args);
   return (true);
 }
 
@@ -110,7 +104,7 @@ void			Kitchen::run()
 	  type = pizza.substr(0, pizza.find(" "));
 	  size = pizza.substr(pizza.find(" ") + 1, pizza.length());
 	  Pizza *pizza = new Pizza(_typePizza[type], _sizePizza[size], _timePizza[type]);
-	  addOnePizza(*pizza);
+	  addOnePizza(pizza);
 	  _nbPizza += 1;
 	  *_toRec << "OK";
 	}
@@ -121,6 +115,11 @@ void			Kitchen::run()
 
 Kitchen::~Kitchen()
 {
+  while (!_ingredients.empty())
+    {
+      delete _ingredients.back();
+      _ingredients.pop_back();
+    }
   delete _fromRec;
   delete _toRec;
 }

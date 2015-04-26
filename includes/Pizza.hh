@@ -5,7 +5,7 @@
 // Login   <jibb@epitech.net>
 //
 // Started on  Fri Apr 17 11:34:50 2015 Jean-Baptiste Grégoire
-// Last update Thu Apr 23 16:46:58 2015 Hugo Prenat
+// Last update Sun Apr 26 01:17:31 2015 Jean-Baptiste Grégoire
 //
 
 #ifndef PIZZA_HH_
@@ -13,6 +13,7 @@
 
 # include <unistd.h>
 # include <vector>
+# include <map>
 
 # include "Plazza.hh"
 # include "Ingredients.hh"
@@ -25,14 +26,17 @@ public:
 
 public:
   bool					cook(float mult) const;
-
+  void					putIngredient(enum TypePizza type,
+						      std::string list[]);
 public:
   std::vector<Ingredients *> const	*getIngredients() const;
+  void					setIngredients(std::vector<Ingredients *> &ingredients);
 
 protected:
   TypePizza				_type;
   TaillePizza				_size;
   int					_time;
+  std::map<TypePizza, std::vector<Ingredients*> >	_ingredientList;
   std::vector<Ingredients*>		_ingredients;
 };
 

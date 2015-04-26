@@ -5,7 +5,7 @@
 // Login   <prenat_h@epitech.eu>
 //
 // Started on  Tue Apr 21 23:54:27 2015 Hugo Prenat
-// Last update Fri Apr 24 03:19:18 2015 Jean-Baptiste Grégoire
+// Last update Sun Apr 26 01:45:41 2015 Jean-Baptiste Grégoire
 //
 
 #include "Ingredients.hh"
@@ -31,4 +31,8 @@ void		Ingredients::takeIngredient()
 void		Ingredients::addIngredient()
 {
   _quantity += 1;
+}
+
+Ingredients::~Ingredients()
+{
 }

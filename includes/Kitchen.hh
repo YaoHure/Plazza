@@ -5,7 +5,7 @@
 // Login   <prenat_h@epitech.eu>
 //
 // Started on  Fri Apr 17 15:27:59 2015 Hugo Prenat
-// Last update Sat Apr 25 20:48:12 2015 Jean-Baptiste Grégoire
+// Last update Sun Apr 26 01:07:57 2015 Jean-Baptiste Grégoire
 //
 
 #ifndef KITCHEN_HH_
@@ -33,10 +33,8 @@ public:
   int					getStockTime() const;
 
 public:
-  bool					addOnePizza(Pizza &pizza);
+  bool					addOnePizza(Pizza *pizza);
   void					regenIngredients();
-  void					putIngredient(std::string const &name,
-						      std::string list[]);
   void					run();
 
 private:
@@ -48,7 +46,6 @@ private:
   int					_stock_time;
   std::vector<Pizza *>			_order;
   std::vector<Ingredients *>		_ingredients;
-  std::map<std::string, std::vector<Ingredients*> >	_ingredientList;
   std::map<std::string, TypePizza>	_typePizza;
   std::map<std::string, TaillePizza>	_sizePizza;
   std::map<std::string, int>		_timePizza;
