@@ -5,7 +5,7 @@
 // Login   <jibb@epitech.net>
 //
 // Started on  Mon Apr 20 19:06:03 2015 Jean-Baptiste Grégoire
-// Last update Thu Apr 23 23:18:37 2015 Jean-Baptiste Grégoire
+// Last update Sun Apr 26 08:39:18 2015 Jean-Baptiste Grégoire
 //
 
 #include "NamedPipe.hh"
@@ -24,6 +24,11 @@ NamedPipe::NamedPipe(std::string const &name) : _name(name)
 bool			NamedPipe::is_good() const
 {
   return (_ifs.good());
+}
+
+void			NamedPipe::set_good()
+{
+  _ifs.clear(std::ios::goodbit | std::ios::eofbit);
 }
 
 void			NamedPipe::operator>>(std::string &str)

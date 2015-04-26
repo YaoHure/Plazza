@@ -5,7 +5,7 @@
 // Login   <jean-baptiste.gregoire@epitech.net>
 //
 // Started on  Fri Apr  17 18:04:17 2015 Jean-Baptiste Grégoire
-// Last update Fri Apr  17 18:04:17 2015 Jean-Baptiste Grégoire
+// Last update Sun Apr 26 07:45:53 2015 Jean-Baptiste Grégoire
 //
 
 #ifndef THREADPOOL_HH
@@ -13,6 +13,8 @@
 
 # include <vector>
 # include <queue>
+# include <exception>
+# include <stdexcept>
 # include "EThread.hh"
 # include "ECondVar.hh"
 # include "EMutex.hh"
@@ -43,7 +45,7 @@ private:
   bool	_working;
   std::vector<EThread *>	_threads;
   std::queue<Job *>		_jobs;
-  ECondVar		_proc;
+  ECondVar			_proc;
   EMutex			_mutex;
 };
 

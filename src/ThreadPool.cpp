@@ -5,7 +5,7 @@
 // Login   <jean-baptiste.gregoire@epitech.net>
 //
 // Started on  Fri Apr  17 18:10:22 2015 Jean-Baptiste Grégoire
-// Last update Fri Apr  17 18:10:22 2015 Jean-Baptiste Grégoire
+// Last update Sun Apr 26 07:47:19 2015 Jean-Baptiste Grégoire
 //
 
 #include "ThreadPool.hh"
@@ -17,7 +17,7 @@ ThreadPool::ThreadPool(int nb_thread) : _size(nb_thread), _working(true)
     EThread	*tmp = new EThread;
 
     if (tmp->launch(thread_start, this) != 0)
-      throw ;
+      throw std::runtime_error("Can't create threadpool !");
     _threads.push_back(tmp);
   }
 }
@@ -39,7 +39,7 @@ void		ThreadPool::stopThePool()
 
 void		ThreadPool::pendingFunc()
 {
-  bool	start = true;
+  bool		start = true;
   Job		*currentJob;
 
   while (start || _working)

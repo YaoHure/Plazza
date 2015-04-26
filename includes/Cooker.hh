@@ -5,7 +5,7 @@
 // Login   <prenat_h@epitech.eu>
 //
 // Started on  Thu Apr 16 17:09:52 2015 Hugo Prenat
-// Last update Sat Apr 25 19:30:34 2015 Jean-Baptiste Grégoire
+// Last update Sun Apr 26 06:46:50 2015 Jean-Baptiste Grégoire
 //
 
 #ifndef COOKER_HH_
@@ -38,6 +38,7 @@ private:
 
 private:
   Kitchen	*_kitchen;
+  EMutex	_fridge;
 };
 
 #endif // !COOKER_HH_

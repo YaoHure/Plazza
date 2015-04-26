@@ -5,7 +5,7 @@
 // Login   <jibb@epitech.net>
 //
 // Started on  Mon Apr 20 19:06:26 2015 Jean-Baptiste Grégoire
-// Last update Thu Apr 23 22:40:56 2015 Jean-Baptiste Grégoire
+// Last update Sun Apr 26 08:15:35 2015 Jean-Baptiste Grégoire
 //
 
 #ifndef NAMEDPIPE_HH_
@@ -14,6 +14,7 @@
 # include <unistd.h>
 # include <sys/types.h>
 # include <sys/stat.h>
+# include <iostream>
 # include <sstream>
 # include <fstream>
 # include "Plazza.hh"
@@ -25,6 +26,7 @@ public:
   bool		is_good() const;
   void		operator>>(std::string &str);
   void		operator<<(std::string const &str);
+  void		set_good();
   ~NamedPipe();
 
 private:

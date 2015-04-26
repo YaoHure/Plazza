@@ -5,7 +5,7 @@
 // Login   <jibb@epitech.net>
 //
 // Started on  Fri Apr 17 16:28:42 2015 Jean-Baptiste Grégoire
-// Last update Sun Apr 26 05:48:46 2015 David Tran
+// Last update Sun Apr 26 08:42:29 2015 Jean-Baptiste Grégoire
 //
 
 #include <sstream>
@@ -198,16 +198,19 @@ void		Reception::getInput()
 
 void			Reception::getOutput() const
 {
-  NamedPipe		nPipe(FIFO_OUTPUT);
   std::string		buf;
   int i = 1;
 
-  while (nPipe.is_good() && !_quit)
+  while (!_quit)
     {
-      nPipe >> buf;
-      mvwprintw(_output, i, 5, "%s", buf.c_str());
-      wrefresh(_output);
-      i++;
+      NamedPipe		nPipe(FIFO_OUTPUT);
+      while (nPipe.is_good())
+	{
+	  nPipe >> buf;
+	  mvwprintw(_output, i, 5, "%s", buf.c_str());
+	  wrefresh(_output);
+	  i++;
+	}
     }
 }
 

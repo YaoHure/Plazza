@@ -5,7 +5,7 @@
 // Login   <prenat_h@epitech.eu>
 //
 // Started on  Fri Apr 17 15:28:13 2015 Hugo Prenat
-// Last update Sun Apr 26 04:47:05 2015 David Tran
+// Last update Sun Apr 26 07:27:15 2015 Jean-Baptiste Grégoire
 //
 
 #include "Kitchen.hh"

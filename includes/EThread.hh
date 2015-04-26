@@ -5,7 +5,7 @@
 // Login   <jean-baptiste.gregoire@epitech.net>
 //
 // Started on  Sat Apr  18 11:49:21 2015 Jean-Baptiste Grégoire
-// Last update Sat Apr 25 21:38:20 2015 David Tran
+// Last update Sun Apr 26 07:39:20 2015 Jean-Baptiste Grégoire
 //
 
 #ifndef ETHREAD_HH
@@ -20,7 +20,7 @@ class EThread
 public:
   EThread();
   int		launch(void *(*routine)(void *), void *args);
-  bool	is_running() const;
+  bool		is_running() const;
   int		waitThread();
   ~EThread();
 
