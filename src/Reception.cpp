@@ -5,7 +5,7 @@
 // Login   <jibb@epitech.net>
 //
 // Started on  Fri Apr 17 16:28:42 2015 Jean-Baptiste Grégoire
-// Last update Sun Apr 26 10:36:11 2015 Jean-Baptiste Grégoire
+// Last update Sun Apr 26 11:02:43 2015 Jean-Baptiste Grégoire
 //
 
 #include <sstream>
@@ -232,6 +232,16 @@ void		Reception::manageOrder()
 
 Reception::~Reception()
 {
+  while (!_toKitchen.empty())
+    {
+      delete _toKitchen.back();
+      _toKitchen.pop_back();
+    }
+  while (!_fromKitchen.empty())
+    {
+      delete _fromKitchen.back();
+      _fromKitchen.pop_back();
+    }
   delwin(_output);
   delwin(_input);
   endwin();
