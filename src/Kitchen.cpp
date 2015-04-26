@@ -5,7 +5,7 @@
 // Login   <prenat_h@epitech.eu>
 //
 // Started on  Fri Apr 17 15:28:13 2015 Hugo Prenat
-// Last update Sun Apr 26 04:47:05 2015 David Tran
+// Last update Sun Apr 26 07:23:16 2015 David Tran
 //
 
 #include "Kitchen.hh"
@@ -95,10 +95,18 @@ void			Kitchen::run()
   std::string		pizza;
   std::string		type;
   std::string		size;
+  std::clock_t		c_start = std::clock();
 
   while (42)
     {
       *_fromRec >> pizza;
+      std::clock_t c_end = std::clock();
+      if ((c_end-c_start) / CLOCKS_PER_SEC > 5)
+	{
+	  std::cout << "out kitchen" << std::endl;
+	  *_toRec << "KO";
+	  return ;
+	}
       if (_capacity - _nbPizza > 0)
 	{
 	  type = pizza.substr(0, pizza.find(" "));
@@ -110,6 +118,7 @@ void			Kitchen::run()
 	}
       else
 	*_toRec << "KO";
+      c_start = std::clock();
     }
 }
 

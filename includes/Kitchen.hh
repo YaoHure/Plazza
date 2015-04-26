@@ -5,7 +5,7 @@
 // Login   <prenat_h@epitech.eu>
 //
 // Started on  Fri Apr 17 15:27:59 2015 Hugo Prenat
-// Last update Sun Apr 26 01:07:57 2015 Jean-Baptiste Grégoire
+// Last update Sun Apr 26 07:22:37 2015 David Tran
 //
 
 #ifndef KITCHEN_HH_
@@ -15,6 +15,7 @@
 # include <string>
 # include <vector>
 # include <map>
+# include <ctime>
 
 # include "Pizza.hh"
 # include "ThreadPool.hh"
