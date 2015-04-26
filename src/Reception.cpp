@@ -5,7 +5,7 @@
 // Login   <jibb@epitech.net>
 //
 // Started on  Fri Apr 17 16:28:42 2015 Jean-Baptiste Grégoire
-// Last update Sun Apr 26 08:42:29 2015 Jean-Baptiste Grégoire
+// Last update Sun Apr 26 10:30:49 2015 Jean-Baptiste Grégoire
 //
 
 #include <sstream>
@@ -171,7 +171,7 @@ void		Reception::getInput()
   std::string	buf;
   char	c;
 
-  while (buf != "quit\n")
+  while (buf != "quit")
     {
       buf.clear();
       c = 0;
@@ -218,7 +218,7 @@ void		Reception::manageOrder()
 {
   std::string	queu;
 
-  while (42)
+  while (!_quit)
     {
       while (!_orders.empty() && (queu = _orders.front()) != "quit")
 	{
