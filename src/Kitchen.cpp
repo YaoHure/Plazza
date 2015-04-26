@@ -5,7 +5,7 @@
 // Login   <prenat_h@epitech.eu>
 //
 // Started on  Fri Apr 17 15:28:13 2015 Hugo Prenat
-// Last update Sun Apr 26 08:43:39 2015 Jean-Baptiste Grégoire
+// Last update Sun Apr 26 10:08:38 2015 Jean-Baptiste Grégoire
 //
 
 #include "Kitchen.hh"
@@ -111,7 +111,7 @@ void			Kitchen::run()
 	{
 	  type = pizza.substr(0, pizza.find(" "));
 	  size = pizza.substr(pizza.find(" ") + 1, pizza.length());
-	  Pizza *pizza = new Pizza(_typePizza[type], _sizePizza[size], _timePizza[type]);
+	  Pizza *pizza = new Pizza(_typePizza[type], _sizePizza[size], _timePizza[type], type);
 	  addOnePizza(pizza);
 	  _nbPizza += 1;
 	  *_toRec << "OK";

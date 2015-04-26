@@ -5,7 +5,7 @@
 // Login   <jibb@epitech.net>
 //
 // Started on  Fri Apr 17 11:34:50 2015 Jean-Baptiste Grégoire
-// Last update Sun Apr 26 01:17:31 2015 Jean-Baptiste Grégoire
+// Last update Sun Apr 26 10:17:02 2015 Jean-Baptiste Grégoire
 //
 
 #ifndef PIZZA_HH_
@@ -21,7 +21,7 @@
 class					Pizza
 {
 public:
-  Pizza(TypePizza type, TaillePizza size, int time);
+  Pizza(TypePizza type, TaillePizza size, int time, std::string const &name);
   ~Pizza();
 
 public:
@@ -30,12 +30,14 @@ public:
 						      std::string list[]);
 public:
   std::vector<Ingredients *> const	*getIngredients() const;
+  std::string const			&getName() const;
   void					setIngredients(std::vector<Ingredients *> &ingredients);
 
 protected:
   TypePizza				_type;
   TaillePizza				_size;
   int					_time;
+  std::string const			_name;
   std::map<TypePizza, std::vector<Ingredients*> >	_ingredientList;
   std::vector<Ingredients*>		_ingredients;
 };

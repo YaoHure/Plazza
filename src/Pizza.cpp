@@ -5,13 +5,13 @@
 // Login   <jean-baptiste.gregoire@epitech.net>
 //
 // Started on  Fri Apr  17 15:41:12 2015 Jean-Baptiste Grégoire
-// Last update Sun Apr 26 04:47:40 2015 David Tran
+// Last update Sun Apr 26 10:13:30 2015 Jean-Baptiste Grégoire
 //
 
 #include "Pizza.hh"
 
-Pizza::Pizza(TypePizza type, TaillePizza size, int time) :
-  _type(type), _size(size), _time(time)
+Pizza::Pizza(TypePizza type, TaillePizza size, int time, std::string const &name) :
+  _type(type), _size(size), _time(time), _name(name)
 {
   std::string	margarita[] = {"Doe", "Tomato", "Gruyere", ""};
   std::string	regina[] = {"Doe", "Tomato", "Gruyere", "Ham", "Mushrooms", ""};
@@ -35,6 +35,11 @@ void			Pizza::putIngredient(enum TypePizza type, std::string list[])
 std::vector<Ingredients *> const	*Pizza::getIngredients() const
 {
   return (&_ingredients);
+}
+
+std::string const	&Pizza::getName() const
+{
+  return (_name);
 }
 
 bool	Pizza::cook(float mult) const

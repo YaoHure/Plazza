@@ -5,7 +5,7 @@
 // Login   <prenat_h@epitech.eu>
 //
 // Started on  Fri Apr 17 15:26:41 2015 Hugo Prenat
-// Last update Sun Apr 26 07:51:32 2015 Jean-Baptiste Grégoire
+// Last update Sun Apr 26 10:15:36 2015 Jean-Baptiste Grégoire
 //
 
 #include "Cooker.hh"
@@ -52,7 +52,7 @@ bool				Cooker::createPizza(Pizza const *pizza)
     sleep(1);
   manageIngredient(pizza, GET);
   pizza->cook(_kitchen->getPreparationTime());
-  _output << "Pizza finie ! (I don't have name anymore)";
+  _output << "Pizza " + pizza->getName() + " is ready to be eat !";
   _fridge.unlock();
   return (true);
 }
