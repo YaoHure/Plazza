@@ -5,7 +5,7 @@
 // Login   <jibb@epitech.net>
 //
 // Started on  Fri Apr 17 16:28:42 2015 Jean-Baptiste Grégoire
-// Last update Sun Apr 26 11:13:02 2015 David Tran
+// Last update Sun Apr 26 17:38:31 2015 Jean-Baptiste Grégoire
 //
 
 #include <sstream>
@@ -74,6 +74,7 @@ void			Reception::sendOrder(std::string const &type, std::string const &size)
     }
   if (_callKitchen.launch(son_fork, this) == -1)
     throw PlazzaErrorRuntime("fork(): Can't create the new kitchen !");
+  _callKitchen.waitFork();
   ss << _callKitchen.getPid();
   _toKitchen.push_back(new NamedPipe(ss.str() + "_toKitchen"));
   _fromKitchen.push_back(new NamedPipe(ss.str() + "_fromKitchen"));

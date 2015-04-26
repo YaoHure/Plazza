@@ -5,7 +5,7 @@
 // Login   <prenat_h@epitech.eu>
 //
 // Started on  Fri Apr 17 15:28:13 2015 Hugo Prenat
-// Last update Sun Apr 26 10:08:38 2015 Jean-Baptiste Grégoire
+// Last update Sun Apr 26 17:40:46 2015 Jean-Baptiste Grégoire
 //
 
 #include "Kitchen.hh"
@@ -103,7 +103,6 @@ void			Kitchen::run()
       std::clock_t c_end = std::clock();
       if ((c_end-c_start) / CLOCKS_PER_SEC > 5)
 	{
-	  std::cout << "out kitchen" << std::endl;
 	  *_toRec << "KO";
 	  return ;
 	}
