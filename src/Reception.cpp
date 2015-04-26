@@ -5,7 +5,7 @@
 // Login   <jibb@epitech.net>
 //
 // Started on  Fri Apr 17 16:28:42 2015 Jean-Baptiste Grégoire
-// Last update Sun Apr 26 05:07:43 2015 David Tran
+// Last update Sun Apr 26 05:48:46 2015 David Tran
 //
 
 #include <sstream>
@@ -61,11 +61,7 @@ void			Reception::sendOrder(std::string const &type, std::string const &size)
   for (it = _toKitchen.begin(); it != _toKitchen.end(); ++it)
     {
       *(*it) << (type + " " + size);
-      std::cout << "test of send" << std::endl;
-      std::cout << "test of send" << std::endl;
-      std::cout << "test of send" << std::endl;
-      *(*it) >> answer;
-      std::cout << "out of send" << std::endl;
+      *(*_fromKitchen.begin()) >> answer;
       if (answer == "OK")
 	return ;
     }
